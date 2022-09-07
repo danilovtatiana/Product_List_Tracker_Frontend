@@ -1,0 +1,14 @@
+<div class="center" *ngIf="showLogin()">
+  <label for="email">Email:</label><br />
+  <input type="text" id="email" name="email" [(ngModel)]="username" /><br />
+
+  <label for="pass">Password:</label><br />
+  <input
+    type="password"
+    id="pass"
+    name="pass"
+    [(ngModel)]="password"
+  /><br /><br />
+  <button (click)="login()">Login</button>
+  <span *ngIf="showError">Bad credentials!</span>
+</div>
