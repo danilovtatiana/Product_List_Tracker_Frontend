@@ -1,1 +1,30 @@
-<p>register works!</p>
+<div fxLayoutAlign="center center" fxFlexFill class="login-container">
+  <mat-card fxFlex="25">
+    <mat-toolbar color="primary">
+      <span>Create Account</span>
+    </mat-toolbar>
+
+    <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="email" placeholder="Email" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" />
+      </mat-form-field>
+      <button mat-raised-button type="submit">Sign Up</button>
+      <mat-toolbar-row>
+        <span class="sign-up"
+          >Already have an Account?
+          <a class="sign-up-link" color="primary" routerLink="/sign-in">
+            Sign in</a
+          ></span
+        >
+      </mat-toolbar-row>
+    </form>
+  </mat-card>
+</div>
