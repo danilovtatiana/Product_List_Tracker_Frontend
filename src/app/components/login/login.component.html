@@ -1,14 +1,26 @@
-<div class="center" *ngIf="showLogin()">
-  <label for="email">Email:</label><br />
-  <input type="text" id="email" name="email" [(ngModel)]="username" /><br />
+<div fxLayoutAlign="center center" fxFlexFill class="login-container">
+  <mat-card fxFlex="25">
+    <mat-toolbar color="primary">
+      <span>Sign In to Your Account</span>
+    </mat-toolbar>
 
-  <label for="pass">Password:</label><br />
-  <input
-    type="password"
-    id="pass"
-    name="pass"
-    [(ngModel)]="password"
-  /><br /><br />
-  <button (click)="login()">Login</button>
-  <span *ngIf="showError">Bad credentials!</span>
+    <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+      <mat-form-field>
+        <input matInput type="email" placeholder="Email" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" />
+      </mat-form-field>
+      <button mat-raised-button type="submit">Sign In</button>
+      <mat-toolbar-row>
+        <span class="sign-up"
+          >Don't have an account?
+          <a class="sign-up-link" color="primary" routerLink="/sign-up">
+            Sign up</a
+          ></span
+        >
+      </mat-toolbar-row>
+    </form>
+  </mat-card>
 </div>
