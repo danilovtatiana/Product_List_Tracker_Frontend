@@ -1,4 +1,4 @@
-import { Product } from './product';
+import { Product } from '../modules/product/product-model';
 
 export interface Stock {
   stockId?: number;

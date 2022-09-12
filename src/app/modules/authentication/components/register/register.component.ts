@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/modules/auth/authentication.service';
+import { AuthenticationService } from 'src/app/modules/authentication/authentication.service';
 
 @Component({
   selector: 'app-register',

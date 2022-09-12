@@ -2,8 +2,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/modules/product/product-model';
+import { ProductService } from 'src/app/modules/product/product.service';
 
 @Component({
   selector: 'app-product',

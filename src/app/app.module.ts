@@ -4,28 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AccountComponent } from './components/account/account.component';
-import { ProductComponent } from './components/product/product.component';
-import { StockComponent } from './components/stock/stock.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LayoutComponent } from './layout/layout.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationModule } from './modules/auth/authentication.module';
+import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { ProductComponent } from './modules/product/product.component';
+import { HeaderModule } from './modules/header/header.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AccountComponent,
-    ProductComponent,
-    StockComponent,
-  ],
+  declarations: [AppComponent, ProductComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AuthenticationModule,
+    HeaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
