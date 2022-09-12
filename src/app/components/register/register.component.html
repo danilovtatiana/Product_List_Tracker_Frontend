@@ -4,17 +4,38 @@
       <span>Create Account</span>
     </mat-toolbar>
 
-    <form fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+    <form
+      fxLayoutAlign="stretch"
+      fxLayout="column"
+      class="login-form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
       <mat-form-field>
-        <input matInput type="text" placeholder="Name" />
+        <input
+          matInput
+          type="text"
+          placeholder="Username"
+          formControlName="username"
+        />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="email" placeholder="Email" />
+        <input
+          matInput
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+        />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="password" placeholder="Password" />
+        <input
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
       </mat-form-field>
       <button mat-raised-button type="submit">Sign Up</button>
       <mat-toolbar-row>

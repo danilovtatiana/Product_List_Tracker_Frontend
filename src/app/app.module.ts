@@ -8,6 +8,10 @@ import { AccountComponent } from './components/account/account.component';
 import { ProductComponent } from './components/product/product.component';
 import { StockComponent } from './components/stock/stock.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutComponent } from './layout/layout.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationModule } from './modules/auth/authentication.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductComponent,
     StockComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AuthenticationModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

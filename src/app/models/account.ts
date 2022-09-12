@@ -1,7 +1,7 @@
 export interface Account {
   accountId?: number;
   email: string;
-  userName: string;
+  username: string;
   password: string;
   creationDate: Date;
 }
