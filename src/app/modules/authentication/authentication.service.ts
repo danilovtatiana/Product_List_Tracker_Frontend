@@ -9,10 +9,19 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
   private readonly apiServerUrl = environment.apiBaseUrl;
-  // isLogged: boolean = false;
-  isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  readonly tokenKey = 'token';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  isLogged$: BehaviorSubject<boolean>;
+
+  constructor(private http: HttpClient, private router: Router) {
+    //chech if user has saved token in local storage
+    const hasToken = window.localStorage.getItem(this.tokenKey);
+    if (!!hasToken) {
+      this.isLogged$ = new BehaviorSubject<boolean>(true);
+    } else {
+      this.isLogged$ = new BehaviorSubject<boolean>(false);
+    }
+  }
 
   login(credentianls: CredentianlsI) {
     const formData = new FormData();
@@ -41,19 +50,21 @@ export class AuthenticationService {
 
   logout() {
     this.isLogged$.next(false);
+    this.isLogged = false;
     this.router.navigate(['/login']);
   }
 
   get isLogged(): boolean {
-    const isLogged = window.localStorage.getItem('token');
+    const isLogged = window.localStorage.getItem(this.tokenKey);
     return !!isLogged;
   }
 
   set isLogged(state: boolean) {
     if (!state) {
-      window.localStorage.removeItem('token');
+      window.localStorage.removeItem(this.tokenKey);
+    } else {
+      window.localStorage.setItem(this.tokenKey, 'hardcodedTokenForTest');
     }
-    window.localStorage.setItem('token', 'bhaZjFQfct41TIGYslJjbg');
   }
 }
 
