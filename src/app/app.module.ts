@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { ProductComponent } from './modules/product/product.component';
 import { HeaderModule } from './modules/header/header.module';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [AppComponent, ProductComponent],
@@ -19,6 +20,7 @@ import { HeaderModule } from './modules/header/header.module';
     HttpClientModule,
     AuthenticationModule,
     HeaderModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

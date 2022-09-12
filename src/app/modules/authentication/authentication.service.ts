@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -11,7 +12,7 @@ export class AuthenticationService {
   // isLogged: boolean = false;
   isLogged$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(credentianls: CredentianlsI) {
     const formData = new FormData();
@@ -36,6 +37,11 @@ export class AuthenticationService {
           this.isLogged$.next(false);
         },
       });
+  }
+
+  logout() {
+    this.isLogged$.next(false);
+    this.router.navigate(['/login']);
   }
 
   get isLogged(): boolean {
