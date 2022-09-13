@@ -14,7 +14,7 @@ export class AuthenticationService {
   isLogged$: BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient, private router: Router) {
-    //chech if user has saved token in local storage
+    //check if user has saved token in local storage
     const hasToken = window.localStorage.getItem(this.tokenKey);
     if (!!hasToken) {
       this.isLogged$ = new BehaviorSubject<boolean>(true);
@@ -51,6 +51,7 @@ export class AuthenticationService {
   logout() {
     this.isLogged$.next(false);
     this.isLogged = false;
+    //delete cookie
     this.router.navigate(['/login']);
   }
 

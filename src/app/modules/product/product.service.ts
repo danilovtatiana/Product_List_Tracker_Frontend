@@ -13,7 +13,9 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   public getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiServerUrl}/product/all`);
+    return this.http.get<Product[]>(`${this.apiServerUrl}/product/all`, {
+      withCredentials: true,
+    });
   }
 
   public getProductByPzn(pzn: number): Observable<Product> {

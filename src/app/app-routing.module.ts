@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { ProductComponent } from './modules/product/product.component';
+import { ProductListComponent } from './modules/product/product-list/product-list.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,11 @@ const routes: Routes = [
         (m) => m.AuthenticationModule
       ),
   },
-  { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
+  {
+    path: 'product',
+    component: ProductListComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: '**',
     redirectTo: '',
