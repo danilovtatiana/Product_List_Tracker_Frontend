@@ -10,9 +10,12 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
 import { HeaderModule } from './modules/header/header.module';
 import { MatTableModule } from '@angular/material/table';
 import { ProductModule } from './modules/product/product.module';
+import { ProductFormComponent } from './modules/product/product-form/product-form.component';
+import { StockComponent } from './modules/stock/stock.component';
+import { UserComponent } from './modules/user/user.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StockComponent, UserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

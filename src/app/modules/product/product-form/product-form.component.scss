@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--pale-green);
+  padding: 14px;
+}
+
+button {
+  width: fit-content;
+}
+
+.action-buttons {
+  display: flex;
+}
