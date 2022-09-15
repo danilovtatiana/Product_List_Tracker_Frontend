@@ -12,11 +12,12 @@ import { MatTableModule } from '@angular/material/table';
 import { ProductModule } from './modules/product/product.module';
 import { ProductFormComponent } from './modules/product/product-form/product-form.component';
 import { StockComponent } from './modules/stock/stock.component';
-import { UserComponent } from './modules/user/user.component';
 import { StockModule } from './modules/stock/stock.module';
+import { UserComponent } from './modules/user/user.component';
+import { UserModule } from './modules/user/user.module';
 
 @NgModule({
-  declarations: [AppComponent, UserComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +28,7 @@ import { StockModule } from './modules/stock/stock.module';
     MatTableModule,
     ProductModule,
     StockModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
