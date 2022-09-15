@@ -13,9 +13,10 @@ import { ProductModule } from './modules/product/product.module';
 import { ProductFormComponent } from './modules/product/product-form/product-form.component';
 import { StockComponent } from './modules/stock/stock.component';
 import { UserComponent } from './modules/user/user.component';
+import { StockModule } from './modules/stock/stock.module';
 
 @NgModule({
-  declarations: [AppComponent, StockComponent, UserComponent],
+  declarations: [AppComponent, UserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +26,7 @@ import { UserComponent } from './modules/user/user.component';
     HeaderModule,
     MatTableModule,
     ProductModule,
+    StockModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
