@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { ProductListComponent } from './modules/product/product-list/product-list.component';
+import { StockComponent } from './modules/stock/stock.component';
 
 const routes: Routes = [
   {
@@ -13,7 +13,27 @@ const routes: Routes = [
   },
   {
     path: 'product',
-    component: ProductListComponent,
+    loadChildren: () =>
+      import('./modules/product/product.module').then((m) => m.ProductModule),
+    // component: ProductListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./modules/user/user.module').then((m) => m.UserModule),
+    canActivate: [AuthGuard],
+  },
+
+  // {
+  //   path: 'stock',
+  //   component: StockComponent,
+  //   canActivate: [AuthGuard],
+  // },
+  {
+    path: 'stock',
+    loadChildren: () =>
+      import('./modules/stock/stock.module').then((m) => m.StockModule),
     canActivate: [AuthGuard],
   },
   {

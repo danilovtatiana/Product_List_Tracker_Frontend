@@ -1,7 +1,8 @@
 <mat-toolbar color="primary" class="mat-elevation-z6" *ngIf="isLogged$ | async">
   <span><mat-icon>medication</mat-icon>Pharmacy</span>
   <div class="spacer"></div>
-  <a mat-button>Products</a>
-  <a mat-button>Profile</a>
+
+  <a mat-button (click)="goTo('/product')"> Products </a>
+  <a mat-button (click)="goTo('/user')">Profile</a>
   <a mat-raised-button (click)="onLogout()">Log Out</a>
 </mat-toolbar>

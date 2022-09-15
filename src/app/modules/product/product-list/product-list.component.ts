@@ -68,4 +68,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts();
   }
+
+  goTo(path: string): void {
+    this.router.navigate([path]);
+  }
 }
