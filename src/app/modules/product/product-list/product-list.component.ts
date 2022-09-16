@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/modules/product/product-model';
 import { ProductService } from 'src/app/modules/product/product.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
@@ -12,6 +13,9 @@ import { AuthenticationService } from '../../authentication/authentication.servi
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
+  subscriptionList: Subscription[] = [];
+  products: Product[] = [];
+
   displayedColumns: string[] = [
     'PZN',
     'Supplier',
@@ -23,19 +27,17 @@ export class ProductListComponent implements OnInit {
     'Actions',
   ];
 
-  products: Product[] = [];
-
   dataSource = new MatTableDataSource(this.products);
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private productService: ProductService,
+    private _productService: ProductService,
     private authService: AuthenticationService
   ) {}
 
   public getProducts(): void {
-    this.productService.getProducts().subscribe({
+    this._productService.getProducts().subscribe({
       next: (response: Product[]) => {
         this.products = response;
         this.dataSource.data = this.products;
@@ -46,24 +48,6 @@ export class ProductListComponent implements OnInit {
       },
     });
   }
-
-  // loadProducts() {
-  //   console.log('List of products');
-  // }
-
-  // logout() {
-  //   this.http
-  //     .post('http://localhost:8001/logout', {}, { withCredentials: true })
-  //     .subscribe(
-  //       () => {
-  //         console.log('Logout Success!');
-  //         this.router.navigate(['/']);
-  //       },
-  //       () => {
-  //         this.router.navigate(['/']);
-  //       }
-  //     );
-  // }
 
   ngOnInit(): void {
     this.getProducts();

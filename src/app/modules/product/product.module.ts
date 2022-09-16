@@ -6,6 +6,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ProductRoutingModule } from './product-routing.module';
 import { StockComponent } from '../stock/stock.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ProductListComponent, ProductFormComponent],
@@ -14,6 +15,7 @@ import { StockComponent } from '../stock/stock.component';
     MaterialModule,
     MatSelectModule,
     ProductRoutingModule,
+    ReactiveFormsModule,
   ],
   exports: [ProductListComponent, ProductFormComponent],
 })
