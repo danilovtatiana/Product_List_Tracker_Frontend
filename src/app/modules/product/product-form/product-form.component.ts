@@ -24,7 +24,7 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {}
 
   addNewProductOnServer(productToPersist: Product) {
-    //apelex API ca sa salvez acest produs pe server
+    //apelex functia care face API call ca sa salvez acest produs pe server
     this._productService.addProduct(productToPersist).subscribe({
       next: (product: Product) =>
         //add succes message

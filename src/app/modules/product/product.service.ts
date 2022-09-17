@@ -24,7 +24,7 @@ export class ProductService {
     });
   }
 
-  //apelez API
+  //apelez API endpoint
   public addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(
       `${this.apiServerUrl}/product/add`,

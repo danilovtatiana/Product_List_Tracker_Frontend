@@ -27,8 +27,8 @@ export class ProductListComponent implements OnInit {
     'Actions',
   ];
 
-  dataSource = new MatTableDataSource(this.products);
-
+  dataSource = new MatTableDataSource(this.products); //tabelul trebuie sa-si ia datele de undeva. aici initializez un table datasource caruia ii dau lista de produse
+  //se noteaza clasa care rasp de interconectare intre view si date care trebuie afisate
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -37,10 +37,11 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   public getProducts(): void {
+    //apelez API ca sa iau lista de produse din server
     this._productService.getProducts().subscribe({
       next: (response: Product[]) => {
         this.products = response;
-        this.dataSource.data = this.products;
+        this.dataSource.data = this.products; // tabelul trebuie populat cu date (datele mele e lista de produse)
       },
       error: (error: HttpErrorResponse) => {
         this.authService.logout(); //ar trebui sa se faca logout doar la 401. dar momentan nu am setate bine erorile de pe BE
@@ -50,7 +51,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getProducts(); //cand se deschide pagina sa fie incarcata cu produse de pe BE
   }
 
   goTo(path: string): void {
