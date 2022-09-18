@@ -53,7 +53,7 @@ export class ProductService {
       }
     );
   }
-  public deleteProduct(pzn: number): Observable<void> {
+  public deleteProductByPzn(pzn: string): Observable<void> {
     return this.http.delete<void>(
       `${this.apiServerUrl}/product/delete/${pzn}`,
       {

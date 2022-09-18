@@ -67,4 +67,13 @@ export class ProductListComponent implements OnInit {
     this.goTo('/product/edit/${productToEdit.pzn}'); //trimit spre pagina de edit
     this._productService.selectedProduct$.next(productToEdit); //emit produsul selectat
   }
+
+  deleteProduct(selectedProduct: Product) {
+    this._productService
+      .deleteProductByPzn(selectedProduct.pzn)
+      .subscribe((product) => {
+        console.log('The product was deleted', product), this.getProducts();
+        // window.location.reload();
+      });
+  }
 }
