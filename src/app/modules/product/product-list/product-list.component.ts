@@ -36,6 +36,10 @@ export class ProductListComponent implements OnInit {
     private authService: AuthenticationService
   ) {}
 
+  ngOnInit(): void {
+    this.getProducts(); //cand se deschide pagina sa fie incarcata cu produse de pe BE
+  }
+
   public getProducts(): void {
     //apelez API ca sa iau lista de produse din server
     this._productService.getProducts().subscribe({
@@ -50,11 +54,17 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getProducts(); //cand se deschide pagina sa fie incarcata cu produse de pe BE
-  }
-
   goTo(path: string): void {
     this.router.navigate([path]);
+  }
+
+  showStock(forProduct: Product) {
+    this.goTo('/stock');
+    this._productService.selectedProduct$.next(forProduct);
+  }
+
+  editProduct(productToEdit: Product) {
+    this.goTo('/product/edit/${productToEdit.pzn}'); //trimit spre pagina de edit
+    this._productService.selectedProduct$.next(productToEdit); //emit produsul selectat
   }
 }

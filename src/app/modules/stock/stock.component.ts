@@ -1,6 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Product } from '../product/product-model';
+import { ProductService } from '../product/product.service';
 import { Stock } from './stock-model';
 import { StockService } from './stock.service';
 
@@ -10,11 +13,25 @@ import { StockService } from './stock.service';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent implements OnInit {
+  subscriptionList: Subscription[] = [];
   productStock?: Stock;
-  constructor(private _stockService: StockService) {}
+  constructor(
+    private _stockService: StockService,
+    private _productService: ProductService
+  ) {
+    //
+  }
 
   ngOnInit(): void {
-    this.getStockByPzn('00286212');
+    this.subscriptionList.push(
+      this._productService.selectedProduct$.subscribe((product: Product) => {
+        this.getStockByPzn(product.pzn); //apelez stockul cu id produsului
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionList.forEach((sub) => sub.unsubscribe());
   }
 
   public getStockByPzn(pzn: string): void {
@@ -29,7 +46,13 @@ export class StockComponent implements OnInit {
   }
 
   getQuantity(): number {
-    return this.productStock?.quantity ?? 0;
+    // return this.productStock?.quantity ?? 0;
+
+    if (this.productStock === undefined) {
+      return 0;
+    } else {
+      return this.productStock.quantity;
+    }
   }
 
   getPrice(): number {

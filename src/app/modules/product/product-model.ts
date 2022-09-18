@@ -1,5 +1,5 @@
 export interface Product {
-  pzn?: string;
+  pzn: string;
   supplier?: string;
   productName: string;
   strength: string;

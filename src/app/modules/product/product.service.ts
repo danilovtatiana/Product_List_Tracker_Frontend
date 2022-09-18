@@ -2,12 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Stock } from '../stock/stock-model';
 import { Product } from './product-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
+  selectedProduct$: BehaviorSubject<Product> = new BehaviorSubject({
+    pzn: '',
+    packageSize: '',
+    productName: '',
+    strength: '',
+    unit: '',
+  });
+
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
@@ -36,7 +45,7 @@ export class ProductService {
   }
 
   public updateProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(
+    return this.http.put<Product>(
       `${this.apiServerUrl}/product/update`,
       product,
       {
