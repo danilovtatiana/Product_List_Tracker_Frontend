@@ -1,0 +1,16 @@
+<form [formGroup]="stockForm" (ngSubmit)="submitStockForm()">
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Quantity</mat-label>
+    <input matInput placeholder="Quantity" formControlName="quantity" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Price</mat-label>
+    <input matInput placeholder="Price" formControlName="price" />
+  </mat-form-field>
+
+  <div class="action-buttons">
+    <button mat-raised-button type="submit">Update</button>
+    <button mat-raised-button type="reset">Reset Values</button>
+  </div>
+</form>

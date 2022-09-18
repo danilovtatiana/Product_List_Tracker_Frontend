@@ -5,7 +5,6 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ProductRoutingModule } from './product-routing.module';
-import { StockComponent } from '../stock/stock.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

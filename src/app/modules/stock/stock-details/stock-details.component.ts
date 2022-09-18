@@ -2,22 +2,23 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Product } from '../product/product-model';
-import { ProductService } from '../product/product.service';
-import { Stock } from './stock-model';
-import { StockService } from './stock.service';
+import { Product } from '../../product/product-model';
+import { ProductService } from '../../product/product.service';
+import { Stock } from '../stock-model';
+import { StockService } from '../stock.service';
 
 @Component({
   selector: 'app-stock',
-  templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.scss'],
+  templateUrl: './stock-details.component.html',
+  styleUrls: ['./stock-details.component.scss'],
 })
-export class StockComponent implements OnInit {
+export class StockDetailsComponent implements OnInit {
   subscriptionList: Subscription[] = [];
   productStock?: Stock;
   constructor(
     private _stockService: StockService,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _router: Router
   ) {
     //
   }
@@ -43,6 +44,12 @@ export class StockComponent implements OnInit {
         console.error(error);
       },
     });
+  }
+  editStock() {
+    if (!!this.productStock) {
+      this._router.navigate(['stock/edit/:id']);
+      this._stockService.selectedStock$.next(this.productStock!);
+    }
   }
 
   getQuantity(): number {

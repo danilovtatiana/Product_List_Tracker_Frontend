@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { StockComponent } from './stock.component';
+import { StockDetailsComponent } from './stock-details/stock-details.component';
+import { StockUpdateComponent } from './stock-update/stock-update.component';
 
 const stockRoutes: Routes = [
   {
     path: '',
-    component: StockComponent,
+    component: StockDetailsComponent,
   },
   {
     path: 'edit/:id',
-    component: StockComponent,
+    component: StockUpdateComponent,
   },
 ];
 
