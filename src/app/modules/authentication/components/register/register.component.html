@@ -37,6 +37,18 @@
           formControlName="password"
         />
       </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+        />
+        <mat-error *ngIf="form.get('confirmPassword')?.hasError('matching')"
+          >Please confirm your password
+        </mat-error>
+      </mat-form-field>
       <button mat-raised-button type="submit">Sign Up</button>
       <mat-toolbar-row>
         <span class="sign-up"

@@ -24,14 +24,14 @@ export class LoginComponent implements OnInit {
       }
     });
     this.form = this.formBuilder.group({
-      username: ['tatiana.danilov@gmail.com', Validators.required],
+      email: ['tatiana.danilov@gmail.com', Validators.required],
       password: ['parolasecreta1', Validators.required],
     });
   }
 
   onSubmit() {
     const credentianls = {
-      username: this.form.value.username,
+      email: this.form.value.username,
       password: this.form.value.password,
     };
 

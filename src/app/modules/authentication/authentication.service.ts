@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../user/user-model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +24,40 @@ export class AuthenticationService {
     }
   }
 
-  login(credentianls: CredentianlsI) {
+  public createAccount(user: User): Observable<User> {
+    return this.http.post<User>(`${this.apiServerUrl}/account/register`, user, {
+      withCredentials: true,
+    });
+  }
+
+  public logIn(credentianls: Credentianls): Observable<HttpResponse<string>> {
     const formData = new FormData();
 
-    formData.append('username', credentianls.username);
+    formData.append('username', credentianls.email);
+    formData.append('password', credentianls.password);
+
+    const url: string = `${this.apiServerUrl}/login`;
+
+    return this.http
+      .post(url, formData, {
+        responseType: 'text',
+        observe: 'response',
+        withCredentials: true,
+      })
+      .pipe(
+        tap((response) => {
+          if (response.ok) {
+            this.isLogged = true;
+            this.isLogged$.next(true);
+          }
+        })
+      );
+  }
+
+  login(credentianls: Credentianls) {
+    const formData = new FormData();
+
+    formData.append('username', credentianls.email);
     formData.append('password', credentianls.password);
 
     const url: string = `${this.apiServerUrl}/login`;
@@ -69,7 +100,7 @@ export class AuthenticationService {
   }
 }
 
-export interface CredentianlsI {
-  username: string;
+export interface Credentianls {
+  email: string;
   password: string;
 }
