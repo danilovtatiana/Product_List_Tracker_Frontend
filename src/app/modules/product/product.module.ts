@@ -6,6 +6,7 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ProductRoutingModule } from './product-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [ProductListComponent, ProductFormComponent],
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     ProductRoutingModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
   ],
   exports: [ProductListComponent, ProductFormComponent],
 })

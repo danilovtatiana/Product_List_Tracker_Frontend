@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,6 +18,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
   displayedColumns: string[] = [
+    // 'Position',
     'PZN',
     'Supplier',
     'Product Name',
@@ -27,8 +29,15 @@ export class ProductListComponent implements OnInit {
     'Actions',
   ];
 
-  dataSource = new MatTableDataSource(this.products); //tabelul trebuie sa-si ia datele de undeva. aici initializez un table datasource caruia ii dau lista de produse
+  dataSource = new MatTableDataSource<Product>(this.products); //tabelul trebuie sa-si ia datele de undeva. aici initializez un table datasource caruia ii dau lista de produse
   //se noteaza clasa care rasp de interconectare intre view si date care trebuie afisate
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   constructor(
     private http: HttpClient,
     private router: Router,

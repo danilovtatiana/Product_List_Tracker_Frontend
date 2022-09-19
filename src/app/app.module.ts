@@ -14,6 +14,7 @@ import { ProductFormComponent } from './modules/product/product-form/product-for
 import { StockModule } from './modules/stock/stock.module';
 import { UserComponent } from './modules/user/user.component';
 import { UserModule } from './modules/user/user.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [AppComponent],
