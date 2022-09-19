@@ -14,13 +14,53 @@
 //   margin-left: 42.5%;
 // }
 
-table,
 .search {
   width: 80%;
-  margin: 20px auto;
+  margin: 40px auto;
+
+  input {
+    height: 35px;
+    width: inherit;
+  }
 }
 
-input {
-  height: 35px;
-  width: inherit;
+table,
+mat-paginator {
+  width: 80%;
+  margin: auto;
+
+  th {
+    background-color: #1e81b0;
+    color: white;
+    font-size: initial;
+  }
+
+  tr.mat-header-row {
+    height: 45px;
+  }
+
+  tr.mat-row {
+    height: 35px;
+  }
+
+  tr.mat-row:nth-child(even) {
+    height: 35px;
+    background-color: rgba(0, 179, 166, 0.04);
+  }
+
+  mat-icon {
+    size: 20px;
+  }
+
+  #delete-icon {
+    padding-left: 50px;
+    color: #d44b47;
+  }
+
+  #edit-icon {
+    color: #5bb55c;
+  }
+  #view-icon {
+    color: #2a81b0;
+  }
 }
