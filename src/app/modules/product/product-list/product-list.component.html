@@ -1,7 +1,33 @@
 <div class="content">
-  <div class="search">
-    <input type="search" placeholder="Serch Product" />
+  <!-- <div class="search">
     <button mat-raised-button routerLink="add">Add New Product</button>
+
+    <input type="search" placeholder="Serch Product" />
+  </div> -->
+  <div class="search-div">
+    <button mat-raised-button routerLink="add">
+      <mat-icon>add</mat-icon>Add New Product
+    </button>
+    <mat-form-field class="search-form-field">
+      <input
+        matInput
+        (keyup)="applyFilter()"
+        placeholder="Search Product"
+        autocomplete="off"
+        #input
+        [(ngModel)]="searchKey"
+      />
+      <button
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        *ngIf="searchKey"
+        (click)="onSearchClear()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
   </div>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
@@ -69,6 +95,11 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">"{{ input.value }}" was not found</td>
+      </tr>
     </table>
 
     <mat-paginator

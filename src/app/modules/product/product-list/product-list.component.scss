@@ -14,13 +14,20 @@
 //   margin-left: 42.5%;
 // }
 
-.search {
+.search-div {
+  // display: flex;
+  // justify-content: space-between;
   width: 80%;
-  margin: 40px auto;
+  margin: 20px auto;
 
-  input {
-    height: 35px;
+  // input {
+  //   height: 35px;
+  //   width: inherit;
+  // }
+  .search-form-field {
     width: inherit;
+    display: inline-grid;
+    padding-left: 20px;
   }
 }
 
@@ -46,10 +53,6 @@ mat-paginator {
   tr.mat-row:nth-child(even) {
     height: 35px;
     background-color: rgba(0, 179, 166, 0.04);
-  }
-
-  mat-icon {
-    size: 20px;
   }
 
   #delete-icon {

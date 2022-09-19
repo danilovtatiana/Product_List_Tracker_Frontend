@@ -5,7 +5,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ProductRoutingModule } from './product-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ProductRoutingModule,
     ReactiveFormsModule,
     MatPaginatorModule,
+    FormsModule,
   ],
   exports: [ProductListComponent, ProductFormComponent],
 })

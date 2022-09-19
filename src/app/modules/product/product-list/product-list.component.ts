@@ -33,6 +33,7 @@ export class ProductListComponent implements OnInit {
   //se noteaza clasa care rasp de interconectare intre view si date care trebuie afisate
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  searchKey!: string;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -84,5 +85,24 @@ export class ProductListComponent implements OnInit {
         console.log('The product was deleted', product), this.getProducts();
         // window.location.reload();
       });
+  }
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+
+  //   // if (this.dataSource.paginator) {
+  //   //   this.dataSource.paginator.firstPage();
+  //   // }
+  // }
+  // applyFilter() {
+  //   this.dataSource.filter = this.searchKey!.trim().toLowerCase();
+  // }
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 }
