@@ -73,6 +73,7 @@ export class RegisterComponent implements OnInit {
     this._authService
       .createAccount(user)
       .pipe(
+        //chain request (dupa register apelez login)
         switchMap((returnedUser) =>
           this._authService.logIn({
             email: user.email,
@@ -84,21 +85,6 @@ export class RegisterComponent implements OnInit {
         next: (response) => this._router.navigate(['/product']),
         error: (error) => console.error(error),
       });
-
-    // this._authService
-    //   .createAccount(user)
-    //   .pipe(
-    //     switchMap((returnedUser) =>
-    //       this._authService.logIn({
-    //         email: user.email,
-    //         password: user.password,
-    //       })
-    //     )
-    //   )
-    //   .subscribe({
-    //     next: (response) => this._router.navigate(['/product']),
-    //     error: (error) => console.error(error),
-    //   });
   }
 
   match(controlName: string, checkControlName: string): ValidatorFn {
