@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/modules/authentication/authentication.service';
+import { Credentianls } from './credentials-model';
 
 @Component({
   selector: 'app-login',
@@ -31,10 +32,21 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const credentianls = {
-      email: this.form.value.username,
+      email: this.form.value.email,
       password: this.form.value.password,
     };
 
-    this.authService.login(credentianls);
+    this.login(credentianls);
+  }
+
+  login(credentianls: Credentianls) {
+    this.authService.logIn(credentianls).subscribe({
+      next: (response) => {
+        this.router.navigate(['/product']);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

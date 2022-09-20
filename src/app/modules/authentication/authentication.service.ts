@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../user/user-model';
+import { Credentianls } from './components/login/credentials-model';
 
 @Injectable({
   providedIn: 'root',
@@ -54,31 +55,6 @@ export class AuthenticationService {
       );
   }
 
-  login(credentianls: Credentianls) {
-    const formData = new FormData();
-
-    formData.append('username', credentianls.email);
-    formData.append('password', credentianls.password);
-
-    const url: string = `${this.apiServerUrl}/login`;
-    this.http
-      .post(url, formData, {
-        responseType: 'text',
-        observe: 'response',
-        withCredentials: true,
-      })
-      .subscribe({
-        next: (response) => {
-          this.isLogged = true;
-          this.isLogged$.next(true);
-        },
-        error: (error) => {
-          this.isLogged = false;
-          this.isLogged$.next(false);
-        },
-      });
-  }
-
   logout() {
     this.isLogged$.next(false);
     this.isLogged = false;
@@ -98,9 +74,4 @@ export class AuthenticationService {
       window.localStorage.setItem(this.tokenKey, 'hardcodedTokenForTest');
     }
   }
-}
-
-export interface Credentianls {
-  email: string;
-  password: string;
 }
