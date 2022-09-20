@@ -65,4 +65,11 @@ export class StockDetailsComponent implements OnInit {
   getPrice(): number {
     return this.productStock?.price ?? 0;
   }
+
+  getProductName(): string {
+    return this.productStock?.product.productName ?? '';
+  }
+  getProductPzn(): string {
+    return this.productStock?.product.pzn ?? '';
+  }
 }
