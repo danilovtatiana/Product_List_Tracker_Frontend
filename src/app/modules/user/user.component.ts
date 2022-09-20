@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 })
 export class UserComponent implements OnInit {
   currentUser?: User;
+  showFiller = false;
   // name: string = '';
   // email: string = '';
 

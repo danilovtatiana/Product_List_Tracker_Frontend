@@ -5,6 +5,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCard, MatCardMdImage, MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [UserComponent],
@@ -14,6 +17,9 @@ import { UserRoutingModule } from './user-routing.module';
     MatInputModule,
     MatButtonModule,
     UserRoutingModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatCardModule,
   ],
   exports: [UserComponent],
 })

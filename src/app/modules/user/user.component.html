@@ -1,47 +1,59 @@
-<!-- <div class="container">
-  <form>
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Email</mat-label>
-      <input matInput />
-    </mat-form-field>
+<div class="user-container">
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer position="end" #drawer class="example-sidenav" mode="side">
+      <div class="form-container">
+        <form>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" />
+          </mat-form-field>
 
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Username</mat-label>
-      <input matInput />
-    </mat-form-field>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" />
+          </mat-form-field>
 
-    <div class="action-buttons">
-      <button mat-raised-button type="submit">Edit Account</button>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Old Password</mat-label>
+            <input matInput placeholder="Old Password" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput placeholder="Confirm Password" />
+          </mat-form-field>
+
+          <!-- <div class="action-buttons">
+          <button mat-raised-button type="submit">Delete Account</button>
+        </div> -->
+        </form>
+      </div>
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        Update Profile
+      </button>
+      <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <img
+        src="https://static.vecteezy.com/system/resources/previews/002/318/271/non_2x/user-profile-icon-free-vector.jpg"
+        alt=""
+      />
+      <div class="user-details">
+        <!-- <div> -->
+        <mat-icon>face</mat-icon>
+        <h3>{{ getUsername() }}</h3>
+        <!-- </div> -->
+        <mat-icon>email</mat-icon>
+        <h3>{{ getEmail() }}</h3>
+        <!-- <div></div> -->
+      </div>
+
+      <!-- <h2>{{ getEmail() }}</h2>
+    <h2>{{ getUsername() }}</h2> -->
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Edit Profile
+      </button>
     </div>
-  </form>
-  <form>
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Username</mat-label>
-      <input matInput placeholder="Username" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Password" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Old Password</mat-label>
-      <input matInput placeholder="Old Password" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Confirm Password</mat-label>
-      <input matInput placeholder="Confirm Password" />
-    </mat-form-field>
-
-    <div class="action-buttons">
-      <button mat-raised-button type="submit">Delete Account</button>
-    </div>
-  </form>
-</div> -->
-
-<div>
-  <h2>{{ getEmail() }}</h2>
-  <h2>{{ getUsername() }}</h2>
+  </mat-drawer-container>
 </div>
