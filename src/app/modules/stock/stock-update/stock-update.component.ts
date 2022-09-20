@@ -59,4 +59,8 @@ export class StockUpdateComponent implements OnInit {
       price: ['', Validators.required],
     });
   }
+
+  getProductName(): string {
+    return this.stockToEdit?.product.productName ?? '';
+  }
 }
