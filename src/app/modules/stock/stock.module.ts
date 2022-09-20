@@ -7,6 +7,7 @@ import { StockRoutingModule } from './stock-routing.module';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { StockUpdateComponent } from './stock-update/stock-update.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [StockDetailsComponent, StockUpdateComponent],
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     StockRoutingModule,
     ReactiveFormsModule,
+    MatCardModule,
   ],
   exports: [StockDetailsComponent, StockUpdateComponent],
 })

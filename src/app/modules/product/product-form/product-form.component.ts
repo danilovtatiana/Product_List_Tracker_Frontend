@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Unit } from 'src/app/enums/unit.enum';
 import { Product } from '../product-model';
 import { ProductService } from '../product.service';
 
@@ -20,6 +21,10 @@ export class ProductFormComponent implements OnInit {
   productForm!: FormGroup;
   subscriptionList: Subscription[] = [];
   viewType: ProductFormComponentViewType;
+  unitOptions = Object.entries(Unit).map(([key, value]) => ({
+    key,
+    value,
+  }));
 
   constructor(
     private _formBuilder: FormBuilder,

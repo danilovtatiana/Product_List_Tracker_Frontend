@@ -1,40 +1,55 @@
-<form [formGroup]="productForm" (ngSubmit)="submitProductForm()">
-  <mat-form-field appearance="outline" class="form-field">
-    <mat-label>PZN</mat-label>
-    <input matInput placeholder="PZN" formControlName="pzn" />
-  </mat-form-field>
+<div class="form-container">
+  <form [formGroup]="productForm" (ngSubmit)="submitProductForm()">
+    <div class="fields-container">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>PZN</mat-label>
+        <input matInput placeholder="PZN" formControlName="pzn" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Product Name</mat-label>
+        <input
+          matInput
+          placeholder="Product Name"
+          formControlName="productName"
+        />
+      </mat-form-field>
 
-  <mat-form-field appearance="outline" class="form-field">
-    <mat-label>Product Name</mat-label>
-    <input matInput placeholder="Product Name" formControlName="productName" />
-  </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Supplier</mat-label>
+        <input matInput placeholder="Supplier" formControlName="supplier" />
+      </mat-form-field>
 
-  <mat-form-field appearance="outline" class="form-field">
-    <mat-label>Supplier</mat-label>
-    <input matInput placeholder="Supplier" formControlName="supplier" />
-  </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Strength</mat-label>
+        <input matInput placeholder="Strength" formControlName="strength" />
+      </mat-form-field>
 
-  <mat-form-field appearance="outline" class="form-field">
-    <mat-label>Strength</mat-label>
-    <input matInput placeholder="Strength" formControlName="strength" />
-  </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Package Size</mat-label>
+        <input
+          matInput
+          placeholder="Package Size"
+          formControlName="packageSize"
+        />
+      </mat-form-field>
 
-  <mat-form-field appearance="outline" class="form-field">
-    <mat-label>Package Size</mat-label>
-    <input matInput placeholder="Package Size" formControlName="packageSize" />
-  </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Unit</mat-label>
+        <mat-select id="unit" value="defaultValueSelect" formControlName="unit">
+          <mat-option [value]="unit.key" *ngFor="let unit of unitOptions">
+            {{ unit.value }}
+          </mat-option>
+          <!-- <mat-option id="st" value="st">St</mat-option>
+      <mat-option value="ml">ml</mat-option> -->
+        </mat-select></mat-form-field
+      >
+    </div>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Unit</mat-label>
-    <mat-select formControlName="unit">
-      <mat-option value="st">St</mat-option>
-      <mat-option value="ml">ml</mat-option>
-    </mat-select></mat-form-field
-  >
-  <div class="action-buttons">
-    <button mat-raised-button type="submit">
-      {{ getSubmitButtonTitle() }}
-    </button>
-    <button mat-raised-button type="reset">Reset Values</button>
-  </div>
-</form>
+    <div class="action-buttons">
+      <button mat-raised-button type="submit">
+        {{ getSubmitButtonTitle() }}
+      </button>
+      <button mat-raised-button type="reset">Reset Values</button>
+    </div>
+  </form>
+</div>
