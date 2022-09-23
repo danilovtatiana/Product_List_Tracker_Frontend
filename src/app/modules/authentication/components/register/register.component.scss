@@ -1,11 +1,26 @@
-.login-container mat-card {
+.register-container mat-card {
   padding: 0px;
-
-  .login-form {
-    padding: 20px;
+  mat-toolbar {
+    background-color: #0e679d;
+    color: white;
   }
-}
-.sign-up {
-  display: table;
-  margin: 0 auto;
+
+  .register-form {
+    padding: 20px;
+
+    .sign-in {
+      display: table;
+      margin: 0 auto;
+    }
+    mat-toolbar-row {
+      justify-content: center;
+    }
+    button {
+      border: 1px solid #0e679d;
+    }
+    button:hover {
+      background-color: #0e679d;
+      color: white;
+    }
+  }
 }

@@ -1,19 +1,11 @@
-// #header {
-//   position: sticky; // sticky relative to the parent
-//   top: 0; // makes element sticky in relation to some position
-//   z-index: 999;
-
-// .spacer {
-//   flex: 1 1 auto;
-// }
-// }
-
 mat-toolbar {
   position: sticky;
   top: 0;
   z-index: 999;
   display: flex;
   justify-content: space-between;
+  background-color: #0e679d;
+  color: white;
 
   nav {
     display: flex;
@@ -25,10 +17,12 @@ mat-toolbar {
     }
     a:hover {
       cursor: pointer;
-      background-color: #254880;
+      // background-color: #8197b9;
+      opacity: 0.5;
     }
     .routerLinkActive {
-      background-color: #254880;
+      background-color: lightgrey;
+      color: black;
     }
   }
 }

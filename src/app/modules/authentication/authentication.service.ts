@@ -46,8 +46,11 @@ export class AuthenticationService {
         withCredentials: true,
       })
       .pipe(
+        //iau raspunsul de la obs si aplic operatorul tap.
         tap((response) => {
+          // tap == asculta ce date trec prin observable
           if (response.ok) {
+            // daca raspunsul e ok atunci salvez local ca user-ul e logat
             this.isLogged = true;
             this.isLogged$.next(true);
           }

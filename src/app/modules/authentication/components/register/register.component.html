@@ -1,4 +1,4 @@
-<div fxLayoutAlign="center center" fxFlexFill class="login-container">
+<div fxLayoutAlign="center center" fxFlexFill class="register-container">
   <mat-card fxFlex="25">
     <mat-toolbar color="primary">
       <span>Create Account</span>
@@ -7,8 +7,8 @@
     <form
       fxLayoutAlign="stretch"
       fxLayout="column"
-      class="login-form"
-      [formGroup]="form"
+      class="register-form"
+      [formGroup]="registerForm"
       (ngSubmit)="onSubmit()"
     >
       <mat-form-field>
@@ -18,6 +18,22 @@
           placeholder="Username"
           formControlName="username"
         />
+        <mat-error
+          *ngIf="registerForm.controls['username'].hasError('required')"
+        >
+          Username is Required!
+        </mat-error>
+
+        <mat-error
+          *ngIf="registerForm.controls['username'].hasError('minlength')"
+        >
+          Username should be at least 5 characters long!
+        </mat-error>
+        <mat-error
+          *ngIf="registerForm.controls['username'].hasError('maxlength')"
+        >
+          Username should be at max 50 characters long!
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -27,15 +43,54 @@
           placeholder="Email"
           formControlName="email"
         />
+        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+          Email is Required!
+        </mat-error>
+        <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+          Email is Invalid!
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input
           matInput
+          [type]="hide ? 'password' : 'text'"
           type="password"
           placeholder="Password"
           formControlName="password"
         />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="registerForm.controls['password'].hasError('required')"
+        >
+          Password is Required!
+        </mat-error>
+        <!-- <mat-error
+          *ngIf="registerForm.controls['password'].hasError('minlength')"
+        >
+          Password should be at least 8 characters long!
+        </mat-error>
+        <mat-error
+          *ngIf="registerForm.controls['password'].hasError('maxlength')"
+        >
+          Password should be at max 20 characters long!
+        </mat-error> -->
+
+        <mat-error
+          *ngIf="registerForm.controls['password'].hasError('invalidPassword')"
+        >
+          > > > Password must contain at least 8 characters, 1 capital letter, 1
+          small letter, and 1 special character
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -45,13 +100,15 @@
           placeholder="Confirm Password"
           formControlName="confirmPassword"
         />
-        <mat-error *ngIf="form.get('confirmPassword')?.hasError('matching')"
+
+        <mat-error
+          *ngIf="registerForm.controls['confirmPassword'].hasError('matching')"
           >Please confirm your password
         </mat-error>
       </mat-form-field>
       <button mat-raised-button type="submit">Sign Up</button>
       <mat-toolbar-row>
-        <span class="sign-up"
+        <span class="sign-in"
           >Already have an Account?
           <a class="sign-up-link" color="primary" routerLink="/login">
             Sign in</a

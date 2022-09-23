@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/modules/authentication/authentication.service';
 import { Credentianls } from './credentials-model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,14 @@ import { Credentianls } from './credentials-model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  form!: FormGroup;
+  loginForm!: FormGroup;
+  hide = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
   ngOnInit(): void {
     this.authService.isLogged$.subscribe((isLogged: boolean) => {
@@ -24,19 +27,24 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/product']);
       }
     });
-    this.form = this.formBuilder.group({
-      email: ['tatiana.danilov@gmail.com', Validators.required],
+    this.loginForm = this.formBuilder.group({
+      email: [
+        'tatiana.danilov@gmail.com',
+        [Validators.required, Validators.email],
+      ],
       password: ['parolasecreta1', Validators.required],
     });
   }
 
   onSubmit() {
-    const credentianls = {
-      email: this.form.value.email,
-      password: this.form.value.password,
-    };
+    if (this.loginForm.valid) {
+      const credentianls = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password,
+      };
 
-    this.login(credentianls);
+      this.login(credentianls);
+    }
   }
 
   login(credentianls: Credentianls) {
@@ -45,7 +53,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/product']);
       },
       error: (error) => {
-        console.error(error);
+        // console.error(error);
+        this._snackBar.open('Bad credentials!', '', {
+          duration: 5000,
+        });
       },
     });
   }

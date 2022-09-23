@@ -7,6 +7,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { AuthenticationService } from 'src/app/modules/authentication/authentication.service';
@@ -18,22 +19,28 @@ import { User } from 'src/app/modules/user/user-model';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  form!: FormGroup;
+  registerForm!: FormGroup;
+  hide = true;
   constructor(
     private formBuilder: FormBuilder,
     private _authService: AuthenticationService,
-    private _router: Router
+    private _router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group(
+    this.registerForm = this.formBuilder.group(
       {
         username: [
-          'teste',
-          Validators.compose([Validators.required, Validators.minLength(5)]),
+          'tatiana',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(50),
+          ]),
         ],
         email: [
-          'email@ss.tt',
+          'tatiana.danilov@gmail.com',
           Validators.compose([
             Validators.required,
             Validators.email,
@@ -42,25 +49,26 @@ export class RegisterComponent implements OnInit {
           ]),
         ],
         password: [
-          '12345678',
+          'parolasecreta3',
           Validators.compose([
             Validators.required,
+            this.patternValidator(),
             Validators.minLength(8),
             Validators.maxLength(20),
           ]),
         ],
-        confirmPassword: ['12345678'],
+        confirmPassword: ['parolasecreta3'],
       },
       { validator: this.match('password', 'confirmPassword') }
     );
   }
 
   onSubmit() {
-    if (this.form.valid) {
+    if (this.registerForm.valid) {
       const user: User = {
-        username: this.form.value.username,
-        email: this.form.value.email,
-        password: this.form.value.password,
+        username: this.registerForm.value.username,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
       };
 
       //apelez functia de create account din serviciu
@@ -74,16 +82,24 @@ export class RegisterComponent implements OnInit {
       .createAccount(user)
       .pipe(
         //chain request (dupa register apelez login)
-        switchMap((returnedUser) =>
-          this._authService.logIn({
-            email: user.email,
-            password: user.password,
-          })
+        switchMap(
+          (
+            returnedUser //transforma datele ce trec prin observalbe
+          ) =>
+            this._authService.logIn({
+              email: user.email,
+              password: user.password,
+            })
         )
       )
       .subscribe({
         next: (response) => this._router.navigate(['/product']),
-        error: (error) => console.error(error),
+        error: (error) => {
+          console.error(error.error);
+          this._snackBar.open('', error.error, {
+            duration: 5000,
+          });
+        },
       });
   }
 
@@ -102,6 +118,19 @@ export class RegisterComponent implements OnInit {
       } else {
         return null;
       }
+    };
+  }
+  patternValidator(): ValidatorFn {
+    return (control: AbstractControl) => {
+      if (!control.value) {
+        return null;
+      }
+      const regex = new RegExp(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$'
+      );
+
+      const valid = regex.test(control.value);
+      return valid ? null : { invalidPassword: true };
     };
   }
 }

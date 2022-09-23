@@ -74,8 +74,10 @@ export class ProductListComponent implements OnInit {
   }
 
   editProduct(productToEdit: Product) {
-    this.goTo('/product/edit/${productToEdit.pzn}'); //trimit spre pagina de edit
     this._productService.selectedProduct$.next(productToEdit); //emit produsul selectat
+    // this.goTo('/product/edit/${productToEdit.pzn}');
+
+    this.router.navigate([`/product/edit/${productToEdit.pzn}`]); //trimit spre pagina de edit
   }
 
   deleteProduct(selectedProduct: Product) {
@@ -83,20 +85,9 @@ export class ProductListComponent implements OnInit {
       .deleteProductByPzn(selectedProduct.pzn)
       .subscribe((product) => {
         console.log('The product was deleted', product), this.getProducts();
-        // window.location.reload();
       });
   }
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  //   // if (this.dataSource.paginator) {
-  //   //   this.dataSource.paginator.firstPage();
-  //   // }
-  // }
-  // applyFilter() {
-  //   this.dataSource.filter = this.searchKey!.trim().toLowerCase();
-  // }
   onSearchClear() {
     this.searchKey = '';
     this.applyFilter();

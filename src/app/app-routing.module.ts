@@ -14,7 +14,6 @@ const routes: Routes = [
     path: 'product',
     loadChildren: () =>
       import('./modules/product/product.module').then((m) => m.ProductModule),
-    // component: ProductListComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -24,11 +23,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
-  // {
-  //   path: 'stock',
-  //   component: StockComponent,
-  //   canActivate: [AuthGuard],
-  // },
   {
     path: 'stock',
     loadChildren: () =>

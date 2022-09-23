@@ -8,6 +8,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, LayoutComponent],
@@ -19,6 +20,7 @@ import { RegisterComponent } from './components/register/register.component';
     FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSnackBarModule,
   ],
   // providers: [AuthenticationService],
 })

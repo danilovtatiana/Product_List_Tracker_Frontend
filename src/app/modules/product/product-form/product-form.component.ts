@@ -1,6 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Unit } from 'src/app/enums/unit.enum';
@@ -21,6 +26,7 @@ export class ProductFormComponent implements OnInit {
   productForm!: FormGroup;
   subscriptionList: Subscription[] = [];
   viewType: ProductFormComponentViewType;
+
   unitOptions = Object.entries(Unit).map(([key, value]) => ({
     key,
     value,
@@ -83,7 +89,7 @@ export class ProductFormComponent implements OnInit {
 
   private _createForm() {
     this.productForm = this._formBuilder.group({
-      pzn: ['', Validators.required], // se genereaza automat
+      pzn: ['', Validators.required],
       productName: ['', Validators.required],
       supplier: ['', Validators.required],
       strength: ['', [Validators.required]],

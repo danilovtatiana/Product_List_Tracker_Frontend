@@ -1,6 +1,6 @@
 <div fxLayoutAlign="center center" fxFlexFill class="login-container">
   <mat-card fxFlex="25">
-    <mat-toolbar color="primary">
+    <mat-toolbar>
       <span>Sign In to Your Account</span>
     </mat-toolbar>
 
@@ -8,7 +8,7 @@
       fxLayoutAlign="stretch"
       fxLayout="column"
       class="login-form"
-      [formGroup]="form"
+      [formGroup]="loginForm"
       (ngSubmit)="onSubmit()"
     >
       <mat-form-field>
@@ -18,16 +18,37 @@
           placeholder="Email"
           formControlName="email"
         />
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+          Email is Required!
+        </mat-error>
+        <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+          Email is Invalid!
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input
           matInput
+          [type]="hide ? 'password' : 'text'"
           type="password"
           placeholder="Password"
           formControlName="password"
         />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+          Password is Required!
+        </mat-error>
       </mat-form-field>
+
       <button mat-raised-button type="submit">Sign In</button>
       <mat-toolbar-row>
         <span class="sign-up"

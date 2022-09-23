@@ -47,7 +47,8 @@ export class StockDetailsComponent implements OnInit {
   }
   editStock() {
     if (!!this.productStock) {
-      this._router.navigate(['stock/edit/:id']);
+      // this._router.navigate(['stock/edit/:id']);
+      this._router.navigate([`/stock/edit/${this.productStock.product.pzn}`]); //trimit spre pagina de edit
       this._stockService.selectedStock$.next(this.productStock!);
     }
   }
