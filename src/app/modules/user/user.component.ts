@@ -1,6 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { User } from './user-model';
 import { UserService } from './user.service';
 
@@ -10,15 +17,76 @@ import { UserService } from './user.service';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
+  userForm!: FormGroup;
   currentUser?: User;
   showFiller = false;
-  // name: string = '';
-  // email: string = '';
+  isEditable = false;
 
-  constructor(private _userService: UserService) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+
+    private _userService: UserService
+  ) {
+    this._createForm();
+  }
 
   ngOnInit(): void {
     this.getUser();
+  }
+  private _createForm() {
+    this.userForm = this._formBuilder.group(
+      {
+        username: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(50),
+          ]),
+        ],
+        password: [
+          '',
+          Validators.compose([
+            Validators.required,
+            this.patternValidator(),
+            Validators.minLength(8),
+            Validators.maxLength(20),
+          ]),
+        ],
+        confirmPassword: [''],
+      },
+      { validator: this.match('password', 'confirmPassword') }
+    );
+  }
+  match(controlName: string, checkControlName: string): ValidatorFn {
+    return (controls: AbstractControl) => {
+      const control = controls.get(controlName);
+      const checkControl = controls.get(checkControlName);
+
+      if (checkControl?.errors && !checkControl.errors['matching']) {
+        return null;
+      }
+
+      if (control?.value !== checkControl?.value) {
+        controls.get(checkControlName)?.setErrors({ matching: true });
+        return { matching: true };
+      } else {
+        return null;
+      }
+    };
+  }
+  patternValidator(): ValidatorFn {
+    return (control: AbstractControl) => {
+      if (!control.value) {
+        return null;
+      }
+      const regex = new RegExp(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$'
+      );
+
+      const valid = regex.test(control.value);
+      return valid ? null : { invalidPassword: true };
+    };
   }
 
   public getUser(): void {
@@ -40,4 +108,5 @@ export class UserComponent implements OnInit {
   getUsername(): string {
     return this.currentUser?.username ?? '';
   }
+  onSubmit() {}
 }

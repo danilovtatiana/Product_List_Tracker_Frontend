@@ -2,32 +2,81 @@
   <mat-drawer-container class="form-container" autosize>
     <mat-drawer position="end" #drawer class="example-sidenav" mode="side">
       <div>
-        <form>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="Username" />
-          </mat-form-field>
+            <input matInput placeholder="Username" formControlName="username" />
+            <mat-error
+              *ngIf="userForm.controls['username'].hasError('required')"
+            >
+              Username is Required!
+            </mat-error>
 
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" />
+            <mat-error
+              *ngIf="userForm.controls['username'].hasError('minlength')"
+            >
+              Username should be at least 5 characters long!
+            </mat-error>
+            <mat-error
+              *ngIf="userForm.controls['username'].hasError('maxlength')"
+            >
+              Username should be at max 50 characters long!
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Old Password</mat-label>
-            <input matInput placeholder="Old Password" />
+            <input
+              matInput
+              placeholder="Old Password"
+              formControlName="password"
+            />
+            <mat-error
+              *ngIf="userForm.controls['password'].hasError('required')"
+            >
+              Old Password is required!
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>New Password</mat-label>
+            <input
+              matInput
+              placeholder="New Password"
+              formControlName="password"
+            />
+            <mat-error
+              *ngIf="userForm.controls['password'].hasError('invalidPassword')"
+            >
+              Password must contain at least 8 characters, 1 capital letter, 1
+              small letter, and 1 special character
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Confirm Password</mat-label>
-            <input matInput placeholder="Confirm Password" />
+            <input
+              matInput
+              placeholder="Confirm Password"
+              formControlName="confirmPassword"
+            />
+            <mat-error
+              *ngIf="userForm.controls['confirmPassword'].hasError('matching')"
+              >Please confirm your password
+            </mat-error>
+            <mat-error
+              *ngIf="userForm.controls['confirmPassword'].hasError('required')"
+              >Confirm password is required!
+            </mat-error>
           </mat-form-field>
         </form>
       </div>
       <button (click)="showFiller = !showFiller" mat-raised-button>
-        Update Profile
+        Update
       </button>
-      <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        Cancel
+      </button>
     </mat-drawer>
 
     <div class="example-sidenav-content">
@@ -42,9 +91,7 @@
         <h3>{{ getEmail() }}</h3>
       </div>
 
-      <button type="button" mat-button (click)="drawer.toggle()">
-        Edit Profile
-      </button>
+      <button type="button" mat-button (click)="drawer.toggle()">Edit</button>
     </div>
   </mat-drawer-container>
 </div>

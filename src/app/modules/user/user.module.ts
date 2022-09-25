@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCard, MatCardMdImage, MatCardModule } from '@angular/material/card';
 import { RegisterComponent } from '../authentication/components/register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [UserComponent],
@@ -21,6 +22,8 @@ import { RegisterComponent } from '../authentication/components/register/registe
     MatSidenavModule,
     MatIconModule,
     MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [UserComponent],
 })

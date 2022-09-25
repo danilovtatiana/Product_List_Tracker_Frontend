@@ -78,9 +78,10 @@ export class ProductListComponent implements OnInit {
   showStock(forProduct: Product) {
     // this.goTo('/stock');
     const dialogConfig = new MatDialogConfig();
-    // dialogConfig.disableClose = true;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '100%';
+    // dialogConfig.width = '100%';
+    dialogConfig.panelClass = 'my-class';
     this.dialog.open(StockComponent, dialogConfig);
     this._productService.selectedProduct$.next(forProduct);
   }
