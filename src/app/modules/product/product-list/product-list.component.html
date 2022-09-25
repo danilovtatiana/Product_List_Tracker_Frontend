@@ -1,6 +1,6 @@
 <div class="content">
   <div class="search-div">
-    <button mat-raised-button routerLink="add">
+    <button id="add-button" mat-raised-button routerLink="add">
       <mat-icon>add</mat-icon>Add New Product
     </button>
     <mat-form-field class="search-form-field">
@@ -68,7 +68,10 @@
       <ng-container matColumnDef="Stock">
         <th mat-header-cell *matHeaderCellDef>Stock</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon id="view-icon" (click)="showStock(element)"
+          <mat-icon
+            id="view-icon"
+            (click)="showStock(element)"
+            matTooltip="View stock for product"
             >visibility</mat-icon
           >
         </td>
@@ -77,13 +80,20 @@
       <ng-container matColumnDef="Actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon id="edit-icon" (click)="editProduct(element)"
+          <mat-icon
+            id="edit-icon"
+            (click)="editProduct(element)"
+            matTooltip="Edit product"
             >edit</mat-icon
           >
 
-          <mat-icon id="delete-icon" (click)="deleteProduct(element)"
+          <mat-icon
+            id="delete-icon"
+            (click)="openDialog()"
+            matTooltip="Delete product"
             >delete</mat-icon
           >
+          <!-- (click)="deleteProduct(element)" -->
         </td>
       </ng-container>
 

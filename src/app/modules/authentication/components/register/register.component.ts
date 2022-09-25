@@ -96,7 +96,7 @@ export class RegisterComponent implements OnInit {
         next: (response) => this._router.navigate(['/product']),
         error: (error) => {
           console.error(error.error);
-          this._snackBar.open('', error.error, {
+          this._snackBar.open(error.error, 'Try again!', {
             duration: 5000,
           });
         },

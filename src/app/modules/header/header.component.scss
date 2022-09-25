@@ -6,6 +6,17 @@ mat-toolbar {
   justify-content: space-between;
   background-color: #0e679d;
   color: white;
+  span {
+    display: inline-flex;
+    align-items: center;
+    font-size: larger;
+    mat-icon {
+      font-size: xxx-large;
+      height: 51px;
+      width: 40px;
+      padding-right: 10px;
+    }
+  }
 
   nav {
     display: flex;
@@ -17,12 +28,15 @@ mat-toolbar {
     }
     a:hover {
       cursor: pointer;
-      // background-color: #8197b9;
       opacity: 0.5;
     }
     .routerLinkActive {
-      background-color: lightgrey;
+      background-color: white;
       color: black;
     }
+    // #logout-button:hover {
+    //   background-color: white;
+    //   color: black;
+    // }
   }
 }

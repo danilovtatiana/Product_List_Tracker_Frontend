@@ -30,7 +30,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     StockModule,
     UserModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

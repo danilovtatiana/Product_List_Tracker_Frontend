@@ -7,9 +7,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { ProductRoutingModule } from './product-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { LeftPaddingFilterPipe } from 'src/app/shared/pipes/left-padding-filter.pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [ProductListComponent, ProductFormComponent],
+  declarations: [
+    ProductListComponent,
+    ProductFormComponent,
+    LeftPaddingFilterPipe,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -18,6 +25,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReactiveFormsModule,
     MatPaginatorModule,
     FormsModule,
+    MatTooltipModule,
+    MatDialogModule,
   ],
   exports: [ProductListComponent, ProductFormComponent],
 })

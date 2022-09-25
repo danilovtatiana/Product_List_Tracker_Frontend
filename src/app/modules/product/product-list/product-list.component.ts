@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -43,7 +44,8 @@ export class ProductListComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private _productService: ProductService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -96,4 +98,6 @@ export class ProductListComponent implements OnInit {
   applyFilter() {
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
+
+  openDialog() {}
 }

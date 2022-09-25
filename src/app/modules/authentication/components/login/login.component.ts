@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         // console.error(error);
-        this._snackBar.open('Bad credentials!', '', {
+        this._snackBar.open('Bad Credentials', 'Try again!', {
           duration: 5000,
         });
       },

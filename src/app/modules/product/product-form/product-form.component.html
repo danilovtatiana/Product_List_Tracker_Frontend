@@ -3,7 +3,21 @@
     <div class="fields-container">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Pzn</mat-label>
-        <input matInput placeholder="Pzn" formControlName="pzn" />
+        <input
+          matInput
+          placeholder="Pzn"
+          [value]="productForm.controls['pzn'].value | leftPaddingFilter"
+          formControlName="pzn"
+        />
+        <mat-error *ngIf="productForm.controls['pzn'].hasError('pattern')">
+          Enter only numbers
+        </mat-error>
+        <!-- <mat-error *ngIf="productForm.controls['pzn'].hasError('minlength')">
+          Pzn should be at max 8 characters long!
+        </mat-error> -->
+        <mat-error *ngIf="productForm.controls['pzn'].hasError('maxlength')">
+          Pzn should be at max 8 characters long!
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Product Name</mat-label>
@@ -12,16 +26,41 @@
           placeholder="Product Name"
           formControlName="productName"
         />
+        <mat-error
+          *ngIf="productForm.controls['productName'].hasError('required')"
+        >
+          Product Name is required!
+        </mat-error>
+        <mat-error
+          *ngIf="productForm.controls['productName'].hasError('maxlength')"
+        >
+          Product Name should be at max 100 characters long!
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Supplier</mat-label>
         <input matInput placeholder="Supplier" formControlName="supplier" />
+        <mat-error
+          *ngIf="productForm.controls['supplier'].hasError('maxlength')"
+        >
+          Supplier should be at max 100 characters long!
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Strength</mat-label>
         <input matInput placeholder="Strength" formControlName="strength" />
+        <mat-error
+          *ngIf="productForm.controls['strength'].hasError('required')"
+        >
+          Strength is required!
+        </mat-error>
+        <mat-error
+          *ngIf="productForm.controls['strength'].hasError('maxlength')"
+        >
+          Strength should be at max 100 characters long!
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-field">
@@ -31,6 +70,16 @@
           placeholder="Package Size"
           formControlName="packageSize"
         />
+        <mat-error
+          *ngIf="productForm.controls['packageSize'].hasError('required')"
+        >
+          Package Size is required!
+        </mat-error>
+        <mat-error
+          *ngIf="productForm.controls['strength'].hasError('maxlength')"
+        >
+          Package Size should be at max 20 characters long!
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="form-field">
@@ -39,8 +88,11 @@
           <mat-option [value]="unit.value" *ngFor="let unit of unitOptions">
             {{ unit.value }}
           </mat-option>
-        </mat-select></mat-form-field
-      >
+        </mat-select>
+        <mat-error *ngIf="productForm.controls['unit'].hasError('required')">
+          Unit is required!
+        </mat-error>
+      </mat-form-field>
     </div>
 
     <div class="action-buttons">

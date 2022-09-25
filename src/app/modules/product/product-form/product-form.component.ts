@@ -52,6 +52,7 @@ export class ProductFormComponent implements OnInit {
       this.subscriptionList.push(
         this._productService.selectedProduct$.subscribe(
           (productToEdit: Product) => {
+            this.productForm.get('pzn')?.disable();
             this.productForm.patchValue(productToEdit);
           }
         )
@@ -89,11 +90,28 @@ export class ProductFormComponent implements OnInit {
 
   private _createForm() {
     this.productForm = this._formBuilder.group({
-      pzn: ['', Validators.required],
-      productName: ['', Validators.required],
-      supplier: ['', Validators.required],
-      strength: ['', [Validators.required]],
-      packageSize: ['', Validators.required],
+      pzn: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[0-9]*$'),
+          Validators.minLength(8),
+          Validators.maxLength(8),
+        ]),
+      ],
+      productName: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(100)]),
+      ],
+      supplier: ['', Validators.maxLength(100)],
+      strength: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(100)]),
+      ],
+      packageSize: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(20)]),
+      ],
       unit: ['', Validators.required],
     });
   }

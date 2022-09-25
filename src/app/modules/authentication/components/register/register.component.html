@@ -105,6 +105,10 @@
           *ngIf="registerForm.controls['confirmPassword'].hasError('matching')"
           >Please confirm your password
         </mat-error>
+        <mat-error
+          *ngIf="registerForm.controls['confirmPassword'].hasError('required')"
+          >Confirm password is required!
+        </mat-error>
       </mat-form-field>
       <button mat-raised-button type="submit">Sign Up</button>
       <mat-toolbar-row>
