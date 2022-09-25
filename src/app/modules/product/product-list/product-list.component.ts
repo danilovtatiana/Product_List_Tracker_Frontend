@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/modules/product/product-model';
 import { ProductService } from 'src/app/modules/product/product.service';
+import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Component({
@@ -45,7 +46,8 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private _productService: ProductService,
     private authService: AuthenticationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogService: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {
@@ -99,5 +101,20 @@ export class ProductListComponent implements OnInit {
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 
-  openDialog() {}
+  openDialog() {
+    const options = {
+      title: 'Are you sure you want to delete this product?',
+      message: 'Selected product will be permanently deleted from catalog.',
+      cancelText: 'Cancel',
+      confirmText: 'Delete',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe((confirmed) => {
+      if (confirmed) {
+        this.deleteProduct;
+      }
+    });
+  }
 }

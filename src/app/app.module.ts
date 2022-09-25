@@ -15,6 +15,7 @@ import { StockModule } from './modules/stock/stock.module';
 import { UserComponent } from './modules/user/user.component';
 import { UserModule } from './modules/user/user.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [AppComponent],

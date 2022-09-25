@@ -11,9 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ConfirmDialogComponent
+  ],
   exports: [
     CommonModule,
     FlexLayoutModule,

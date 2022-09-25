@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
 import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
@@ -13,18 +14,31 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private _authService: AuthenticationService,
-    private _router: Router
+    private _router: Router,
+    private _dialogService: ConfirmDialogService
   ) {
     this.isLogged$ = this._authService.isLogged$;
   }
 
   ngOnInit(): void {}
-
-  onLogout() {
+  logout() {
     this._authService.logout();
   }
 
-  goTo(path: string): void {
-    this._router.navigate([path]);
+  onLogout() {
+    const options = {
+      title: 'Are you sure you want to logout?',
+      message: 'You will be return to the login screen.',
+      cancelText: 'Cancel',
+      confirmText: 'Log out',
+    };
+
+    this._dialogService.open(options);
+
+    this._dialogService.confirmed().subscribe((confirmed) => {
+      if (confirmed) {
+        this.logout();
+      }
+    });
   }
 }

@@ -14,6 +14,7 @@ export class StockUpdateComponent implements OnInit {
   stockForm!: FormGroup;
   subscriptionList: Subscription[] = [];
   stockToEdit?: Stock;
+  isEdit = true;
 
   constructor(
     private _formBuilder: FormBuilder,
