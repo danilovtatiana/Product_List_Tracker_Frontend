@@ -16,6 +16,8 @@ import { UserComponent } from './modules/user/user.component';
 import { UserModule } from './modules/user/user.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { StockComponent } from './modules/stock/stock/stock.component';
+import { RegisterComponent } from './modules/authentication/components/register/register.component';
 
 @NgModule({
   declarations: [AppComponent],

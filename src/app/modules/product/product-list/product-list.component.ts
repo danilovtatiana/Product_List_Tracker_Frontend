@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -9,6 +9,9 @@ import { Product } from 'src/app/modules/product/product-model';
 import { ProductService } from 'src/app/modules/product/product.service';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
+import { StockDetailsComponent } from '../../stock/stock-details/stock-details.component';
+import { StockUpdateComponent } from '../../stock/stock-update/stock-update.component';
+import { StockComponent } from '../../stock/stock/stock.component';
 
 @Component({
   selector: 'app-product',
@@ -47,7 +50,7 @@ export class ProductListComponent implements OnInit {
     private _productService: ProductService,
     private authService: AuthenticationService,
     private dialog: MatDialog,
-    private dialogService: ConfirmDialogService
+    private _dialogService: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +76,12 @@ export class ProductListComponent implements OnInit {
   }
 
   showStock(forProduct: Product) {
-    this.goTo('/stock');
+    // this.goTo('/stock');
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '100%';
+    this.dialog.open(StockComponent, dialogConfig);
     this._productService.selectedProduct$.next(forProduct);
   }
 
@@ -101,7 +109,7 @@ export class ProductListComponent implements OnInit {
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 
-  openDialog() {
+  openDeleteDialog(selectedProduct: Product) {
     const options = {
       title: 'Are you sure you want to delete this product?',
       message: 'Selected product will be permanently deleted from catalog.',
@@ -109,11 +117,11 @@ export class ProductListComponent implements OnInit {
       confirmText: 'Delete',
     };
 
-    this.dialogService.open(options);
+    this._dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe((confirmed) => {
+    this._dialogService.confirmed().subscribe((confirmed) => {
       if (confirmed) {
-        this.deleteProduct;
+        this.deleteProduct(selectedProduct);
       }
     });
   }

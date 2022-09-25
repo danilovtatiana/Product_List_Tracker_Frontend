@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     this._authService.logout();
   }
 
-  onLogout() {
+  openLogoutDialog() {
     const options = {
       title: 'Are you sure you want to logout?',
       message: 'You will be return to the login screen.',

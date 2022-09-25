@@ -56,7 +56,7 @@ export class StockUpdateComponent implements OnInit {
 
   private _createForm() {
     this.stockForm = this._formBuilder.group({
-      quantity: ['', Validators.required], // se genereaza automat
+      quantity: ['', Validators.required],
       price: ['', Validators.required],
     });
   }

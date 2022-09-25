@@ -1,0 +1,23 @@
+<div class="form-container">
+  <form [formGroup]="stockForm" (ngSubmit)="submitStockForm()">
+    <div id="product-name-field">
+      <h2><span>Update stock for: </span>{{ getProductName() }}</h2>
+    </div>
+    <div class="fields-container">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Quantity</mat-label>
+        <input matInput placeholder="Quantity" formControlName="quantity" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="Price" formControlName="price" />
+      </mat-form-field>
+    </div>
+
+    <div class="action-buttons">
+      <button mat-raised-button type="submit">Edit</button>
+      <button mat-raised-button type="reset">Reset Values</button>
+    </div>
+  </form>
+</div>

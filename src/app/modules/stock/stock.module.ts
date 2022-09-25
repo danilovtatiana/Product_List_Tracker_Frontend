@@ -8,9 +8,10 @@ import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { StockUpdateComponent } from './stock-update/stock-update.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { StockComponent } from './stock/stock.component';
 
 @NgModule({
-  declarations: [StockDetailsComponent, StockUpdateComponent],
+  declarations: [StockDetailsComponent, StockUpdateComponent, StockComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -20,6 +21,6 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     MatCardModule,
   ],
-  exports: [StockDetailsComponent, StockUpdateComponent],
+  exports: [StockDetailsComponent, StockUpdateComponent, StockComponent],
 })
 export class StockModule {}
