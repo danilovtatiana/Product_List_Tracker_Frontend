@@ -1,12 +1,25 @@
-.header,
-.dialog-message {
-  text-transform: lowercase;
+p {
+  text-align: center;
 }
-.header::first-letter,
-.dialog-message::first-letter {
-  text-transform: uppercase;
-}
-.btn-cancel {
-  background-color: red;
-  color: #fff;
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  height: 35px;
+
+  #cancel-btn {
+    background-color: #5bb55c;
+    color: white;
+    margin-right: 15px;
+
+    // border: 2px solid grey;
+
+    // border-radius: 5px;
+    // margin-right: 30px;
+    // background-color: white;
+  }
+  #delete-btn {
+    background-color: #d44b47;
+    color: white;
+  }
 }

@@ -3,18 +3,13 @@
     <div class="fields-container">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Pzn</mat-label>
-        <input
-          matInput
-          placeholder="Pzn"
-          [value]="productForm.controls['pzn'].value | leftPaddingFilter"
-          formControlName="pzn"
-        />
+        <input matInput placeholder="Pzn" formControlName="pzn" />
         <mat-error *ngIf="productForm.controls['pzn'].hasError('pattern')">
           Enter only numbers
         </mat-error>
-        <!-- <mat-error *ngIf="productForm.controls['pzn'].hasError('minlength')">
-          Pzn should be at max 8 characters long!
-        </mat-error> -->
+        <mat-error *ngIf="productForm.controls['pzn'].hasError('required')">
+          Pzn is required!
+        </mat-error>
         <mat-error *ngIf="productForm.controls['pzn'].hasError('maxlength')">
           Pzn should be at max 8 characters long!
         </mat-error>
@@ -99,7 +94,7 @@
       <button mat-raised-button type="submit">
         {{ getSubmitButtonTitle() }}
       </button>
-      <button mat-raised-button type="reset">Reset Values</button>
+      <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
     </div>
   </form>
 </div>

@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group(
       {
         username: [
-          'tatiana',
+          '',
           Validators.compose([
             Validators.required,
             Validators.minLength(5),
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
           ]),
         ],
         email: [
-          'tatiana.danilov@gmail.com',
+          '',
           Validators.compose([
             Validators.required,
             Validators.email,
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
           ]),
         ],
         password: [
-          'parolasecreta3',
+          '',
           Validators.compose([
             Validators.required,
             this.patternValidator(),
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
             Validators.maxLength(20),
           ]),
         ],
-        confirmPassword: ['parolasecreta3'],
+        confirmPassword: [''],
       },
       { validator: this.match('password', 'confirmPassword') }
     );

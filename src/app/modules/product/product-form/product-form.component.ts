@@ -6,9 +6,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Unit } from 'src/app/enums/unit.enum';
+import { LeftPaddingFilterPipe } from 'src/app/shared/pipes/left-padding-filter.pipe';
 import { Product } from '../product-model';
 import { ProductService } from '../product.service';
 
@@ -35,7 +37,9 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _productService: ProductService,
-    private _router: Router
+    private _router: Router,
+    private _snackBar: MatSnackBar,
+    private _leftPadding: LeftPaddingFilterPipe
   ) {
     this._createForm(); //trebuie sa am formul cand se initializeaza clasa
 
@@ -75,6 +79,7 @@ export class ProductFormComponent implements OnInit {
     //se apeleaza cand se apasa butonul de submit
     // creez un obiect de tip Product cu toate entitatile din form
     const productToPersist: Product = { ...this.productForm?.getRawValue() };
+    productToPersist.pzn = this._leftPadding.transform(productToPersist.pzn);
 
     //apelam functia de addNewProductOnServer()
     if (this.viewType == ProductFormComponentViewType.UpdateProduct) {
@@ -95,7 +100,6 @@ export class ProductFormComponent implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.pattern('^[0-9]*$'),
-          Validators.minLength(8),
           Validators.maxLength(8),
         ]),
       ],
@@ -117,7 +121,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   getSubmitButtonTitle(): string {
-    switch (+this.viewType) {
+    switch (this.viewType) {
       case ProductFormComponentViewType.UpdateProduct: {
         return 'Update product';
       }
@@ -135,7 +139,11 @@ export class ProductFormComponent implements OnInit {
   updateProduct(productToUpdate: Product) {
     this._productService.updateProduct(productToUpdate).subscribe({
       next: (product: Product) => (
-        this._router.navigate(['/product']), this.resetForm()
+        this._snackBar.open('Product successfully updated', 'OK', {
+          duration: 5000,
+        }),
+        this._router.navigate(['/product']),
+        this.resetForm()
       ),
 
       error: (error) => console.error(error),
@@ -146,11 +154,17 @@ export class ProductFormComponent implements OnInit {
     //apelex functia care face API call ca sa salvez acest produs pe server
     this._productService.addProduct(productToPersist).subscribe({
       next: (product: Product) => (
-        //add succes message
-        this._router.navigate(['/product']), this.resetForm()
+        this._snackBar.open('Product successfully added', 'OK', {
+          duration: 5000,
+        }),
+        this._router.navigate(['/product']),
+        this.resetForm()
       ),
       // this._router.navigateByUrl('/product'),
       error: (error) => this.showError(error),
     });
+  }
+  cancel() {
+    this._router.navigate(['product']);
   }
 }

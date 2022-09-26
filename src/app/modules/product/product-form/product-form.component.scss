@@ -3,15 +3,15 @@
   justify-content: center;
 
   form {
-    width: 50%;
-    margin-top: 250px;
+    width: 40%;
+    margin-top: 200px;
     background-color: #d3d3d3c9;
     border-radius: 15px;
     border: 2px solid #0e679d;
 
     .fields-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       grid-gap: 1em;
       margin: 20px;
 

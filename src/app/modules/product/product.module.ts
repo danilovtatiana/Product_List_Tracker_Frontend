@@ -30,5 +30,6 @@ import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dial
     MatDialogModule,
   ],
   exports: [ProductListComponent, ProductFormComponent],
+  providers: [LeftPaddingFilterPipe],
 })
 export class ProductModule {}

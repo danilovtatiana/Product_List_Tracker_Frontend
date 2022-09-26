@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -50,7 +51,8 @@ export class ProductListComponent implements OnInit {
     private _productService: ProductService,
     private authService: AuthenticationService,
     private dialog: MatDialog,
-    private _dialogService: ConfirmDialogService
+    private _dialogService: ConfirmDialogService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -97,6 +99,9 @@ export class ProductListComponent implements OnInit {
     this._productService
       .deleteProductByPzn(selectedProduct.pzn)
       .subscribe((product) => {
+        this._snackBar.open('Product successfully deleted', 'OK', {
+          duration: 5000,
+        });
         console.log('The product was deleted', product), this.getProducts();
       });
   }

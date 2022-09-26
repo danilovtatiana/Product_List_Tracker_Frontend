@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from '../../product/product-model';
@@ -25,7 +26,8 @@ export class StockComponent implements OnInit {
     private _stockService: StockService,
     private _productService: ProductService,
     private _router: Router,
-    private _dialogRef: MatDialogRef<StockComponent>
+    private _dialogRef: MatDialogRef<StockComponent>,
+    private _snackBar: MatSnackBar
   ) {
     this._createForm();
   }
@@ -66,7 +68,14 @@ export class StockComponent implements OnInit {
   private _createForm() {
     this.stockForm = this._formBuilder.group({
       quantity: ['', Validators.required],
-      price: ['', Validators.required],
+
+      price: [
+        '',
+        Validators.compose([
+          Validators.required,
+          // Validators.pattern('^[0-9]*$'),
+        ]),
+      ],
     });
   }
 
@@ -82,12 +91,33 @@ export class StockComponent implements OnInit {
   updateStock(stockToUpdate: Stock) {
     this._stockService.updateStock(stockToUpdate).subscribe({
       next: (stock: Stock) => (
-        this._changeFormStatus(false), this._dialogRef.close()
+        this._snackBar.open('Stock successfully updated', 'OK', {
+          duration: 5000,
+        }),
+        this._changeFormStatus(false),
+        this._dialogRef.close()
       ),
       error: (error) => console.error(error),
     });
   }
   getProductName(): string {
     return this.productStock?.product.productName ?? '';
+  }
+  getQuantity(): number {
+    // return this.productStock?.quantity ?? 0;
+
+    if (this.productStock === undefined) {
+      return 0;
+    } else {
+      return this.productStock.quantity;
+    }
+  }
+
+  getPrice(): number {
+    return this.productStock?.price ?? 0;
+  }
+
+  closeStockDialog() {
+    this._dialogRef.close();
   }
 }
