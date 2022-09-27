@@ -33,7 +33,9 @@
   </div>
 
   <div class="action-buttons">
-    <button mat-raised-button type="submit">Edit</button>
+    <button mat-raised-button type="submit">
+      {{ getSubmitButtonTitle() }}
+    </button>
     <button mat-raised-button type="button" (click)="closeStockDialog()">
       Cancel
     </button>

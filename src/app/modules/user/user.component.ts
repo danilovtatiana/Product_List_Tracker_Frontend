@@ -8,6 +8,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomvalidationService } from 'src/app/shared/validators/custom-validation.service';
 import { User } from './user-model';
 import { UserService } from './user.service';
@@ -27,7 +28,8 @@ export class UserComponent implements OnInit {
     private _formBuilder: FormBuilder,
 
     private _userService: UserService,
-    private _customValidator: CustomvalidationService
+    private _customValidator: CustomvalidationService,
+    private _snackBar: MatSnackBar
   ) {
     this._createForm();
   }
@@ -99,5 +101,30 @@ export class UserComponent implements OnInit {
   getUsername(): string {
     return this.currentUser?.username ?? '';
   }
-  onSubmit() {}
+
+  updateUser(userToUpdate: User) {
+    this._userService.updateUser(userToUpdate).subscribe({
+      next: (user: User) => (
+        this._snackBar.open('User details successfully updated', 'OK', {
+          duration: 5000,
+        }),
+        (this.currentUser = user)
+      ),
+
+      error: (error) => {
+        console.error(error.error);
+        this._snackBar.open(error.error, 'Try again!', {
+          duration: 5000,
+        });
+      },
+    });
+  }
+
+  submitUserForm() {
+    if (this.userForm.valid) {
+      let userToUpdate: User = { ...this.userForm?.getRawValue() };
+
+      this.updateUser(userToUpdate);
+    }
+  }
 }

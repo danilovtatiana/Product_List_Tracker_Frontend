@@ -22,4 +22,10 @@ export class UserService {
       withCredentials: true,
     });
   }
+
+  public updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this.apiServerUrl}/account/me`, user, {
+      withCredentials: true,
+    });
+  }
 }

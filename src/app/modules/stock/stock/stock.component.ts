@@ -84,6 +84,14 @@ export class StockComponent implements OnInit {
       this.stockForm.disable();
     }
   }
+
+  getSubmitButtonTitle(): string {
+    if (this.isEditable) {
+      return 'Update stock';
+    } else {
+      return 'Edit stock';
+    }
+  }
   updateStock(stockToUpdate: Stock) {
     this._stockService.updateStock(stockToUpdate).subscribe({
       next: (stock: Stock) => (
