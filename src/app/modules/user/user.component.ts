@@ -8,6 +8,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { CustomvalidationService } from 'src/app/shared/validators/custom-validation.service';
 import { User } from './user-model';
 import { UserService } from './user.service';
 
@@ -25,7 +26,8 @@ export class UserComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
 
-    private _userService: UserService
+    private _userService: UserService,
+    private _customValidator: CustomvalidationService
   ) {
     this._createForm();
   }
@@ -49,45 +51,20 @@ export class UserComponent implements OnInit {
           '',
           Validators.compose([
             Validators.required,
-            this.patternValidator(),
+            this._customValidator.patternValidator(),
             Validators.minLength(8),
             Validators.maxLength(20),
           ]),
         ],
         confirmPassword: [''],
       },
-      { validator: this.match('password', 'confirmPassword') }
+      {
+        validator: this._customValidator.matchPassword(
+          'password',
+          'confirmPassword'
+        ),
+      }
     );
-  }
-  match(controlName: string, checkControlName: string): ValidatorFn {
-    return (controls: AbstractControl) => {
-      const control = controls.get(controlName);
-      const checkControl = controls.get(checkControlName);
-
-      if (checkControl?.errors && !checkControl.errors['matching']) {
-        return null;
-      }
-
-      if (control?.value !== checkControl?.value) {
-        controls.get(checkControlName)?.setErrors({ matching: true });
-        return { matching: true };
-      } else {
-        return null;
-      }
-    };
-  }
-  patternValidator(): ValidatorFn {
-    return (control: AbstractControl) => {
-      if (!control.value) {
-        return null;
-      }
-      const regex = new RegExp(
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$'
-      );
-
-      const valid = regex.test(control.value);
-      return valid ? null : { invalidPassword: true };
-    };
   }
 
   public getUser(): void {

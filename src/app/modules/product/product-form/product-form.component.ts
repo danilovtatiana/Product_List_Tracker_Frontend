@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Unit } from 'src/app/enums/unit.enum';
-import { LeftPaddingFilterPipe } from 'src/app/shared/pipes/left-padding-filter.pipe';
+import { LeftPaddingFilterPipe } from 'src/app/pipes/left-padding-filter.pipe';
 import { Product } from '../product-model';
 import { ProductService } from '../product.service';
 

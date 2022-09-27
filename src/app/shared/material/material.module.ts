@@ -11,12 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [
-    ConfirmDialogComponent
-  ],
+  declarations: [ConfirmDialogComponent],
   exports: [
     CommonModule,
     FlexLayoutModule,
@@ -30,6 +32,10 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatTooltipModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}

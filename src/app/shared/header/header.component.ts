@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
-import { AuthenticationService } from '../authentication/authentication.service';
+import { AuthenticationService } from '../../modules/authentication/authentication.service';
 
 @Component({
   selector: 'app-header',

@@ -71,13 +71,7 @@ export class StockComponent implements OnInit {
     this.stockForm = this._formBuilder.group({
       quantity: ['', Validators.required],
 
-      price: [
-        '',
-        Validators.compose([
-          Validators.required,
-          // Validators.pattern('^[0-9]*$'),
-        ]),
-      ],
+      price: ['', Validators.compose([Validators.required])],
     });
   }
 
