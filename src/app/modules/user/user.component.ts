@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -19,7 +19,7 @@ import { UserService } from './user.service';
 export class UserComponent implements OnInit {
   userForm!: FormGroup;
   currentUser?: User;
-  showFiller = false;
+  isShowingMatDrawer = false;
   isEditable = false;
 
   constructor(
@@ -99,6 +99,14 @@ export class UserComponent implements OnInit {
         console.error(error);
       },
     });
+  }
+
+  toggleShowMatDrawer(): boolean {
+    if (!this.isShowingMatDrawer) {
+      return (this.isShowingMatDrawer = true);
+    } else {
+      return (this.isShowingMatDrawer = false);
+    }
   }
 
   getEmail(): string {

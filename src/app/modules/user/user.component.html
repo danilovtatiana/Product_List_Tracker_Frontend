@@ -1,8 +1,18 @@
 <div class="user-container">
   <mat-drawer-container class="form-container" autosize>
-    <mat-drawer position="end" #drawer class="example-sidenav" mode="side">
+    <mat-drawer
+      position="end"
+      #drawer
+      class="example-sidenav"
+      mode="side"
+      [opened]="isShowingMatDrawer"
+    >
       <div>
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" />
+          </mat-form-field>
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Username</mat-label>
             <input matInput placeholder="Username" formControlName="username" />
@@ -71,19 +81,16 @@
           </mat-form-field>
         </form>
       </div>
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Update
-      </button>
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        Cancel
-      </button>
+      <div class="action-buttons">
+        <button mat-raised-button>Update</button>
+        <button (click)="toggleShowMatDrawer()" mat-raised-button>
+          Cancel
+        </button>
+      </div>
     </mat-drawer>
 
     <div class="example-sidenav-content">
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/002/318/271/non_2x/user-profile-icon-free-vector.jpg"
-        alt=""
-      />
+      <img src="../../../assets/user-logo.jpg" alt="user logo" />
       <div class="user-details">
         <mat-icon>face</mat-icon>
         <h3>{{ getUsername() }}</h3>
@@ -91,7 +98,15 @@
         <h3>{{ getEmail() }}</h3>
       </div>
 
-      <button type="button" mat-button (click)="drawer.toggle()">Edit</button>
+      <button
+        mat-button
+        [hidden]="isShowingMatDrawer"
+        id="edit-btn"
+        type="button"
+        (click)="toggleShowMatDrawer()"
+      >
+        Edit
+      </button>
     </div>
   </mat-drawer-container>
 </div>
