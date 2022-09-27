@@ -23,12 +23,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
-  // {
-  //   path: 'stock',
-  //   loadChildren: () =>
-  //     import('./modules/stock/stock.module').then((m) => m.StockModule),
-  //   canActivate: [AuthGuard],
-  // },
   {
     path: '**',
     redirectTo: '',

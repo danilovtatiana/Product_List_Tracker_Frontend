@@ -1,4 +1,3 @@
-<!-- <div class="form-container"> -->
 <form [formGroup]="stockForm" (ngSubmit)="submitStockForm()">
   <div id="product-name-field">
     <h2><span>Update stock for: </span>{{ getProductName() }}</h2>
@@ -14,7 +13,6 @@
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Price €</mat-label>
-      <!-- <span matPrefix>$&nbsp;</span> -->
 
       <input
         matInput
@@ -41,4 +39,3 @@
     </button>
   </div>
 </form>
-<!-- </div> -->

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Product } from '../../product/product-model';
 import { ProductService } from '../../product/product.service';
@@ -25,7 +24,6 @@ export class StockComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _stockService: StockService,
     private _productService: ProductService,
-    private _router: Router,
     private _dialogRef: MatDialogRef<StockComponent>,
     private _snackBar: MatSnackBar
   ) {
@@ -41,7 +39,9 @@ export class StockComponent implements OnInit {
     );
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subscriptionList.forEach((sub) => sub.unsubscribe());
+  }
 
   public getStockByPzn(pzn: string): void {
     this._stockService.getStockByProductPzn(pzn).subscribe({
@@ -87,9 +87,9 @@ export class StockComponent implements OnInit {
 
   getSubmitButtonTitle(): string {
     if (this.isEditable) {
-      return 'Update stock';
+      return 'Update';
     } else {
-      return 'Edit stock';
+      return 'Edit';
     }
   }
   updateStock(stockToUpdate: Stock) {

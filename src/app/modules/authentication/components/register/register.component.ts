@@ -1,12 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -77,7 +70,6 @@ export class RegisterComponent implements OnInit {
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
       };
-
       //apelez functia de create account din serviciu
       this._register(user);
     }

@@ -43,15 +43,6 @@ img {
   display: flex;
 }
 
-// button {
-//   background-color: white;
-// }
-
-// .action-buttons {
-//       display: flex;
-//       justify-content: flex-end;
-//       margin-bottom: 30px;
-
 button {
   border: 2px solid #0e679d;
   border-radius: 5px;
@@ -65,7 +56,6 @@ button:hover {
   background-color: #0e679d;
   color: white;
 }
-// }
 
 form {
   display: flex;
@@ -77,11 +67,6 @@ form {
 .action-buttons {
   display: flex;
   justify-content: flex-end;
-  // margin-bottom: 10px;
-}
-
-#edit-btn {
-  width: 80px;
 }
 
 [hidden] {

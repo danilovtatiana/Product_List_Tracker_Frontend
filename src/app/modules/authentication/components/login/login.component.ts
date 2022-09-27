@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/modules/authentication/authentication.service';
 import { Credentianls } from './credentials-model';
@@ -21,6 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
+
   ngOnInit(): void {
     this.authService.isLogged$.subscribe((isLogged: boolean) => {
       if (isLogged) {

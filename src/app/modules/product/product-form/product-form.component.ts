@@ -162,8 +162,12 @@ export class ProductFormComponent implements OnInit {
         this._router.navigate(['/product']),
         this.resetForm()
       ),
-      // this._router.navigateByUrl('/product'),
-      error: (error) => this.showError(error),
+      error: (error) => {
+        console.error(error.error);
+        this._snackBar.open(error.error, 'Try again!', {
+          duration: 5000,
+        });
+      },
     });
   }
   cancel() {

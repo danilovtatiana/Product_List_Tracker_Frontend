@@ -22,6 +22,5 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HttpClientModule,
     MatSnackBarModule,
   ],
-  // providers: [AuthenticationService],
 })
 export class AuthenticationModule {}

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
@@ -15,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private _authService: AuthenticationService,
-    private _router: Router,
     private _dialogService: ConfirmDialogService
   ) {
     this.isLogged$ = this._authService.isLogged$;

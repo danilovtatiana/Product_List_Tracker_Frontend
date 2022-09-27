@@ -10,8 +10,6 @@ import { Product } from 'src/app/modules/product/product-model';
 import { ProductService } from 'src/app/modules/product/product.service';
 import { ConfirmDialogService } from 'src/app/shared/confirm-dialog/confirm-dialog.service';
 import { AuthenticationService } from '../../authentication/authentication.service';
-import { StockDetailsComponent } from '../../stock/stock-details/stock-details.component';
-import { StockUpdateComponent } from '../../stock/stock-update/stock-update.component';
 import { StockComponent } from '../../stock/stock/stock.component';
 
 @Component({
@@ -46,7 +44,6 @@ export class ProductListComponent implements OnInit {
   }
 
   constructor(
-    private http: HttpClient,
     private router: Router,
     private _productService: ProductService,
     private authService: AuthenticationService,
@@ -78,11 +75,9 @@ export class ProductListComponent implements OnInit {
   }
 
   showStock(forProduct: Product) {
-    // this.goTo('/stock');
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    // dialogConfig.width = '100%';
     dialogConfig.panelClass = 'my-class';
     this.dialog.open(StockComponent, dialogConfig);
     this._productService.selectedProduct$.next(forProduct);

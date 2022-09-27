@@ -1,7 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../user/user-model';
 import { Credentianls } from './components/login/credentials-model';
@@ -11,7 +11,7 @@ import { Credentianls } from './components/login/credentials-model';
 })
 export class AuthenticationService {
   private readonly apiServerUrl = environment.apiBaseUrl;
-  readonly tokenKey = 'token';
+  readonly tokenKey = 'is logged';
 
   isLogged$: BehaviorSubject<boolean>;
 
@@ -74,7 +74,7 @@ export class AuthenticationService {
     if (!state) {
       window.localStorage.removeItem(this.tokenKey);
     } else {
-      window.localStorage.setItem(this.tokenKey, 'hardcodedTokenForTest');
+      window.localStorage.setItem(this.tokenKey, 'true');
     }
   }
 }
