@@ -78,15 +78,17 @@ export class ProductFormComponent implements OnInit {
   submitProductForm() {
     //se apeleaza cand se apasa butonul de submit
     // creez un obiect de tip Product cu toate entitatile din form
-    const productToPersist: Product = { ...this.productForm?.getRawValue() };
-    productToPersist.pzn = this._leftPadding.transform(productToPersist.pzn);
+    if (this.productForm.valid) {
+      const productToPersist: Product = { ...this.productForm?.getRawValue() };
+      productToPersist.pzn = this._leftPadding.transform(productToPersist.pzn);
 
-    //apelam functia de addNewProductOnServer()
-    if (this.viewType == ProductFormComponentViewType.UpdateProduct) {
-      // verific ca sa stiu ce apelez mai departe (update/save)
-      this.updateProduct(productToPersist);
-    } else {
-      this.addNewProductOnServer(productToPersist);
+      //apelam functia de addNewProductOnServer()
+      if (this.viewType == ProductFormComponentViewType.UpdateProduct) {
+        // verific ca sa stiu ce apelez mai departe (update/save)
+        this.updateProduct(productToPersist);
+      } else {
+        this.addNewProductOnServer(productToPersist);
+      }
     }
   }
   resetForm() {

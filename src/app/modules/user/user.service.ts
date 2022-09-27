@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './user-model';
 import { HttpClient } from '@angular/common/http';
@@ -9,6 +9,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
   private apiServerUrl = environment.apiBaseUrl;
+  selectedUser$: BehaviorSubject<User> = new BehaviorSubject({
+    email: '',
+    password: '',
+    username: '',
+  });
 
   constructor(private http: HttpClient) {}
 

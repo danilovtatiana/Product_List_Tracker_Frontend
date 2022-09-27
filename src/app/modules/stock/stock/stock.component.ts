@@ -56,11 +56,13 @@ export class StockComponent implements OnInit {
   }
   submitStockForm() {
     if (this.isEditable && !!this.productStock) {
-      let stockFromForm: Stock = { ...this.stockForm?.getRawValue() };
-      stockFromForm.stockId = this.productStock!.stockId;
-      stockFromForm.product = this.productStock!.product;
+      if (this.stockForm.valid) {
+        let stockFromForm: Stock = { ...this.stockForm?.getRawValue() };
+        stockFromForm.stockId = this.productStock!.stockId;
+        stockFromForm.product = this.productStock!.product;
 
-      this.updateStock(stockFromForm);
+        this.updateStock(stockFromForm);
+      }
     }
     this._changeFormStatus(true);
   }

@@ -36,6 +36,7 @@ export class UserComponent implements OnInit {
   private _createForm() {
     this.userForm = this._formBuilder.group(
       {
+        email: [],
         username: [
           '',
           Validators.compose([
@@ -102,6 +103,11 @@ export class UserComponent implements OnInit {
   }
 
   toggleShowMatDrawer(): boolean {
+    if (!!this.currentUser) {
+      this.userForm.get('email')?.disable();
+      this.userForm.patchValue(this.currentUser!);
+    }
+
     if (!this.isShowingMatDrawer) {
       return (this.isShowingMatDrawer = true);
     } else {
