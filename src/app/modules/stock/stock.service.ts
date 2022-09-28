@@ -8,18 +8,6 @@ import { Stock } from './stock-model';
   providedIn: 'root',
 })
 export class StockService {
-  selectedStock$: BehaviorSubject<Stock> = new BehaviorSubject({
-    stockId: 0,
-    price: 0,
-    product: {
-      pzn: '',
-      packageSize: '',
-      productName: '',
-      strength: '',
-      unit: '',
-    },
-    quantity: 0,
-  });
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}

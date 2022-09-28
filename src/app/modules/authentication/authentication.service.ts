@@ -11,13 +11,13 @@ import { Credentianls } from './components/login/credentials-model';
 })
 export class AuthenticationService {
   private readonly apiServerUrl = environment.apiBaseUrl;
-  readonly tokenKey = 'is logged';
+  readonly isLoggedKey = 'isLogged';
 
   isLogged$: BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient, private router: Router) {
     //check if user has saved token in local storage
-    const hasToken = window.localStorage.getItem(this.tokenKey);
+    const hasToken = window.localStorage.getItem(this.isLoggedKey);
     if (!!hasToken) {
       this.isLogged$ = new BehaviorSubject<boolean>(true);
     } else {
@@ -66,15 +66,15 @@ export class AuthenticationService {
   }
 
   get isLogged(): boolean {
-    const isLogged = window.localStorage.getItem(this.tokenKey);
+    const isLogged = window.localStorage.getItem(this.isLoggedKey);
     return !!isLogged;
   }
 
   set isLogged(state: boolean) {
     if (!state) {
-      window.localStorage.removeItem(this.tokenKey);
+      window.localStorage.removeItem(this.isLoggedKey);
     } else {
-      window.localStorage.setItem(this.tokenKey, 'true');
+      window.localStorage.setItem(this.isLoggedKey, 'true');
     }
   }
 }

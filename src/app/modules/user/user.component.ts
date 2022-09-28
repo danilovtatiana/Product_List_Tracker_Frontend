@@ -29,6 +29,11 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+
+    //disable temporary. missing api
+    this.userForm.get('oldPassword')?.disable();
+    this.userForm.get('password')?.disable();
+    this.userForm.get('confirmPassword')?.disable();
   }
   private _createForm() {
     this.userForm = this._formBuilder.group(
@@ -42,6 +47,7 @@ export class UserComponent implements OnInit {
             Validators.maxLength(50),
           ]),
         ],
+        oldPassword: [''],
         password: [
           '',
           Validators.compose([

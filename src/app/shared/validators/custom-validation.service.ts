@@ -19,7 +19,7 @@ export class CustomvalidationService {
         return null;
       }
 
-      if (passwordControl?.value !== passwordControl?.value) {
+      if (passwordControl?.value !== confirmPasswordControl?.value) {
         controls.get(confirmPassword)?.setErrors({ matching: true });
         return { matching: true };
       } else {

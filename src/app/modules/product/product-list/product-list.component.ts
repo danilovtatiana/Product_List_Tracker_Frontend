@@ -107,7 +107,7 @@ export class ProductListComponent implements OnInit {
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchKey.trim().toLowerCase();
+    this.dataSource.filter = this.searchKey;
   }
 
   openDeleteDialog(selectedProduct: Product) {
